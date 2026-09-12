@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DocSlot AI Assistance</title>
+
+    <link rel="stylesheet" href="css/AI-help.css">
+</head>
+
+<body>
+
+    <div class="ai-container">
+
+        <!-- HEADER -->
+        <header class="ai-header">
+
+            <div class="ai-brand">
+                <div class="ai-logo">🩺</div>
+
+                <div>
+                    <h1>DocSlot AI Assistance</h1>
+                    <p>Your intelligent healthcare companion</p>
+                </div>
+            </div>
+
+            <div class="status">
+                <span></span>
+                Online
+            </div>
+
+        </header>
+
+
+        <!-- CHAT AREA -->
+        <main class="chat-area" id="chatArea">
+
+            <div class="welcome-message">
+
+                <div class="bot-avatar">🩺</div>
+
+                <div class="message bot-message">
+
+                    <h3>Hello! 👋</h3>
+
+                    <p>
+                        I'm DocSlot's AI Health Assistant.
+                        I can help you understand your symptoms
+                        and find the appropriate type of doctor.
+                    </p>
+
+                    <p class="warning">
+                        I provide general health information,
+                        not a medical diagnosis.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK QUESTIONS -->
+
+            <div class="quick-questions">
+
+                <button data-question="I have a headache. Which doctor should I see?">
+                    🤕 Headache
+                </button>
+
+                <button data-question="I have a skin problem. Which doctor should I see?">
+                    🧴 Skin Problem
+                </button>
+
+                <button data-question="I have joint pain. Which doctor should I see?">
+                    🦴 Joint Pain
+                </button>
+
+                <button data-question="I need a general health checkup.">
+                    🩺 General Checkup
+                </button>
+
+            </div>
+
+        </main>
+
+
+        <!-- INPUT -->
+        <footer class="chat-input-area">
+
+            <div class="input-wrapper">
+
+                <textarea
+                    id="userInput"
+                    rows="1"
+                    placeholder="Describe your health concern..."
+                ></textarea>
+
+                <button id="sendButton">
+                    ➤
+                </button>
+
+            </div>
+
+            <p class="disclaimer">
+                AI responses are for general informational purposes only.
+                For medical concerns, consult a qualified healthcare professional.
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="js/AI-help.js"></script>
+
+</body>
+</html>

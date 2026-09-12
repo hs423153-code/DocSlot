@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Find and book appointments with trusted doctors near you.">
+
+    <title>DocSlot - See Doctors</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/see-doctor.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-container">
+
+            <!-- Logo -->
+            <a href="index.html" class="site-logo">
+                DocSlot
+            </a>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+
+                <a href="index.html" class="nav-link">
+                    Home
+                </a>
+
+                <a href="see-doctor.html" class="nav-link active">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html" class="nav-link">
+                    Home Service
+                </a>
+
+                <a href="contact.html" class="nav-link">
+                    Contact
+                </a>
+
+            </nav>
+
+            <!-- Mobile menu button
+                 JS/CSS se later hamburger banega -->
+            <button class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             PAGE INTRO / SEARCH
+        ================================================== -->
+
+        <section class="doctor-search-section">
+
+            <div class="container">
+
+                <div class="page-heading">
+
+                    <span class="section-label">
+                        Find Healthcare
+                    </span>
+
+                    <h1>
+                        Find the Right Doctor for You
+                    </h1>
+
+                    <p>
+                        Search for doctors by name, specialization,
+                        city or availability.
+                    </p>
+
+                </div>
+
+
+                <!-- Search Bar -->
+
+                <div class="doctor-search">
+
+                    <label for="doctorSearch" class="sr-only">
+                        Search doctor by name
+                    </label>
+
+                    <input
+                        type="search"
+                        id="doctorSearch"
+                        placeholder="Search doctor by name..."
+                        autocomplete="off">
+
+                    <button
+                        type="button"
+                        id="searchButton"
+                        aria-label="Search">
+
+                        🔍
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FILTER / CATEGORIES
+        ================================================== -->
+
+        <section class="doctor-filter-section">
+
+            <div class="container">
+
+                <div class="filter-header">
+
+                    <h2>
+                        Find Your Doctor
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="clearFilters"
+                        class="clear-filter-btn">
+
+                        Clear Filters
+
+                    </button>
+
+                </div>
+
+
+                <div class="filter-container">
+
+
+                    <!-- CITY -->
+
+                    <div class="filter-group">
+
+                        <label for="cityFilter">
+                            Select City
+                        </label>
+
+                        <select id="cityFilter">
+
+                            <option value="">
+                                All Cities
+                            </option>
+
+                            <!-- JS can populate cities later -->
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SPECIALIZATION -->
+
+                    <div class="filter-group">
+
+                        <label for="specializationFilter">
+                            Select Specialization
+                        </label>
+
+                        <select id="specializationFilter">
+
+                            <option value="">
+                                All Specializations
+                            </option>
+
+                            <option value="cardiologist">
+                                Cardiologist
+                            </option>
+
+                            <option value="neurologist">
+                                Neurologist
+                            </option>
+
+                            <option value="orthopedic">
+                                Orthopedic
+                            </option>
+
+                            <option value="dermatologist">
+                                Dermatologist
+                            </option>
+
+                            <option value="general-physician">
+                                General Physician
+                            </option>
+
+                            <option value="pediatrician">
+                                Pediatrician
+                            </option>
+
+                            <option value="gynecologist">
+                                Gynecologist
+                            </option>
+
+                            <option value="dentist">
+                                Dentist
+                            </option>
+
+                            <option value="ent-specialist">
+                                ENT Specialist
+                            </option>
+
+                            <option value="ophthalmologist">
+                                Ophthalmologist
+                            </option>
+
+                            <option value="psychiatrist">
+                                Psychiatrist
+                            </option>
+
+                            <option value="urologist">
+                                Urologist
+                            </option>
+
+                            <option value="pulmonologist">
+                                Pulmonologist
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- AVAILABLE DAY -->
+
+                    <div class="filter-group">
+
+                        <label for="dayFilter">
+                            Available Day
+                        </label>
+
+                        <select id="dayFilter">
+
+                            <option value="">
+                                Any Day
+                            </option>
+
+                            <option value="monday">
+                                Monday
+                            </option>
+
+                            <option value="tuesday">
+                                Tuesday
+                            </option>
+
+                            <option value="wednesday">
+                                Wednesday
+                            </option>
+
+                            <option value="thursday">
+                                Thursday
+                            </option>
+
+                            <option value="friday">
+                                Friday
+                            </option>
+
+                            <option value="saturday">
+                                Saturday
+                            </option>
+
+                            <option value="sunday">
+                                Sunday
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- GENDER -->
+
+                    <div class="filter-group">
+
+                        <label for="genderFilter">
+                            Doctor Gender
+                        </label>
+
+                        <select id="genderFilter">
+
+                            <option value="">
+                                Any Gender
+                            </option>
+
+                            <option value="male">
+                                Male
+                            </option>
+
+                            <option value="female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- APPLY FILTER -->
+
+                    <button
+                        type="button"
+                        id="applyFilters"
+                        class="apply-filter-btn">
+
+                        Apply Filter
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DOCTOR CARDS
+        ================================================== -->
+
+        <section class="doctors-section">
+
+            <div class="container">
+
+
+                <!-- Section heading -->
+
+                <div class="doctors-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            Available Doctors
+                        </span>
+
+                        <h2>
+                            Choose Your Doctor
+                        </h2>
+
+                    </div>
+
+
+                    <!-- JS will update this count -->
+
+                    <p id="doctorCount">
+                        Doctors available
+                    </p>
+
+                </div>
+
+
+
+                <!--
+                    IMPORTANT:
+
+                    Doctor cards will NOT be manually written here.
+
+                    JavaScript will read doctor data and generate
+                    the cards inside this container.
+                -->
+
+                <div
+                    class="doctor-grid"
+                    id="doctorGrid">
+
+                    <!--
+                        JS GENERATED DOCTOR CARDS
+                    -->
+
+                </div>
+
+
+
+                <!-- No results message -->
+
+                <div
+                    class="no-doctors"
+                    id="noDoctorsMessage"
+                    hidden>
+
+                    <div class="no-doctors-icon">
+                        🩺
+                    </div>
+
+                    <h3>
+                        No doctors found
+                    </h3>
+
+                    <p>
+                        Try changing your search or filter options.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="resetSearch">
+
+                        Reset Search
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         DOCTOR DETAILS MODAL
+    ====================================================== -->
+
+    <div
+    class="modal-overlay"
+    id="doctorModal"
+    aria-hidden="true"
+    hidden>
+
+
+        <div
+            class="doctor-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalDoctorName">
+
+
+            <!-- Close -->
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeDoctorModal"
+                aria-label="Close doctor details">
+
+                ×
+
+            </button>
+
+
+
+            <!-- Doctor Photo -->
+
+            <div class="modal-doctor-image">
+
+                <img
+                    id="modalDoctorImage"
+                    src=""
+                    alt="Doctor">
+
+            </div>
+
+
+
+            <!-- Doctor Information -->
+
+            <div class="modal-doctor-info">
+
+                <span
+                    id="modalDoctorSpecialization"
+                    class="doctor-specialization">
+
+                </span>
+
+
+                <h2 id="modalDoctorName">
+                    Doctor Name
+                </h2>
+
+
+                <p id="modalDoctorQualification">
+                    Qualification
+                </p>
+
+
+                <p id="modalDoctorExperience">
+                    Experience
+                </p>
+
+
+                <p id="modalDoctorLocation">
+                    Clinic Location
+                </p>
+
+
+                <div class="modal-rating">
+
+                    <span id="modalDoctorRating">
+                        ★★★★★
+                    </span>
+
+                    <span id="modalDoctorReviews">
+                        0 Reviews
+                    </span>
+
+                </div>
+
+
+
+                <!-- Fee -->
+
+                <div class="doctor-fee">
+
+                    <span>
+                        Consultation Fee
+                    </span>
+
+                    <strong id="modalDoctorFee">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- Availability -->
+
+                <div class="doctor-availability">
+
+                    <h3>
+                        Availability
+                    </h3>
+
+                    <p id="modalDoctorDays">
+                        Available Days
+                    </p>
+
+                    <p id="modalDoctorTiming">
+                        Available Timing
+                    </p>
+
+                </div>
+
+
+
+                <!-- Detailed Reviews -->
+
+                <div class="doctor-reviews">
+
+                    <h3>
+                        Reviews
+                    </h3>
+
+                    <div id="modalDoctorReviewsList">
+
+                        <!--
+                            Reviews will be generated by JS
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div id="modalDoctorReviewsList"></div>
+
+<!-- yahan Write a Review wala block -->
+
+                <div class="write-review">
+
+    <h4>Leave a Review</h4>
+
+    <div class="review-stars-input">
+
+        <button type="button" data-rating="1">★</button>
+        <button type="button" data-rating="2">★</button>
+        <button type="button" data-rating="3">★</button>
+        <button type="button" data-rating="4">★</button>
+        <button type="button" data-rating="5">★</button>
+
+    </div>
+
+    <input
+        type="text"
+        id="reviewerName"
+        placeholder="Your name"
+        maxlength="40">
+
+    <textarea
+        id="reviewText"
+        placeholder="Write your review..."
+        maxlength="300">
+    </textarea>
+
+    <button
+        type="button"
+        id="submitReview"
+        class="submit-review-btn">
+        Submit Review
+    </button>
+
+    <p
+        id="reviewSubmitMessage"
+        class="review-submit-message">
+    </p>
+
+</div>
+
+
+
+                <!-- Book Appointment -->
+
+                <button
+                    type="button"
+                    id="bookAppointmentButton"
+                    class="book-appointment-btn">
+
+                    Book Appointment
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         APPOINTMENT BOOKING MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="appointmentModal"
+        aria-hidden="true"
+        hidden>
+
+        <div
+            class="appointment-modal"
+            role="dialog"
+            aria-modal="true">
+
+
+            <!-- Close -->
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeAppointmentModal"
+                aria-label="Close appointment window">
+
+                ×
+
+            </button>
+
+
+
+            <div class="appointment-header">
+
+                <span class="section-label">
+                    Appointment
+                </span>
+
+                <h2>
+                    Book Your Appointment
+                </h2>
+
+                <p id="appointmentDoctorName">
+                    Doctor Name
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 STEP 1 — DATE
+            ========================================== -->
+
+            <div
+                class="booking-step"
+                id="dateStep">
+
+                <h3>
+                    1. Select Date
+                </h3>
+
+                <label for="appointmentDate">
+                    Choose appointment date
+                </label>
+
+                <input
+                    type="date"
+                    id="appointmentDate">
+
+                <button
+                    type="button"
+                    id="continueToSlots"
+                    class="continue-btn">
+
+                    Continue
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 STEP 2 — TIME SLOT
+            ========================================== -->
+
+            <div
+                class="booking-step"
+                id="slotStep"
+                hidden>
+
+                <h3>
+                    2. Select Time Slot
+                </h3>
+
+                <!--
+                    JS will generate available slots
+                    according to selected doctor's availability.
+                -->
+
+                <div
+                    class="time-slots"
+                    id="timeSlots">
+
+                    <!-- JS generated slots -->
+
+                </div>
+
+                <button
+                    type="button"
+                    id="continueToPatient"
+                    class="continue-btn"
+                    disabled>
+
+                    Continue
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 STEP 3 — PATIENT DETAILS
+            ========================================== -->
+
+            <div
+                class="booking-step"
+                id="patientStep"
+                hidden>
+
+                <h3>
+                    3. Patient Details
+                </h3>
+
+
+                <div class="form-group">
+
+                    <label for="patientName">
+                        Patient Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientName"
+                        placeholder="Enter patient name"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="patientMobile">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="patientMobile"
+                        placeholder="Enter mobile number">
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="patientEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="patientEmail"
+                        placeholder="Enter email address">
+
+                </div>
+
+
+                <p class="confirmation-note">
+                    Enter either your mobile number or email
+                    to receive your booking confirmation.
+                </p>
+
+
+
+                <button
+                    type="button"
+                    id="confirmBooking"
+                    class="confirm-booking-btn">
+
+                    Confirm Booking
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 STEP 4 — SUCCESS
+            ========================================== -->
+
+            <div
+                class="booking-success"
+                id="bookingSuccess"
+                hidden>
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>
+                    Appointment Booked!
+                </h2>
+
+                <p id="confirmationMessage">
+                    Your appointment has been successfully booked.
+                </p>
+
+                <button
+                    type="button"
+                    id="closeBooking"
+                    class="continue-btn">
+                
+                    Done
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-container">
+
+
+            <!-- Footer Brand -->
+
+            <div class="footer-brand">
+
+                <a href="index.html"
+                    class="footer-logo">
+
+                    DocSlot
+
+                </a>
+
+                <p>
+                    Making doctor appointments simpler,
+                    faster and more convenient.
+                </p>
+
+            </div>
+
+
+            <!-- Company -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="see-doctor.html">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Home Service
+                </a>
+
+                <a href="contact.html">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+            <!-- Help -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Help
+                </h3>
+
+                <a href="AI.html">
+                    Ask AI
+                </a>
+
+                <a href="see-doctor.html">
+                    Book Appointment
+                </a>
+
+                <a href="contact.html">
+                    Contact Support
+                </a>
+
+            </div>
+
+
+            <!-- Social / Extra -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="see-doctor.html">
+                    Find a Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Ward Boy Service
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 DocSlot. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+<!--
+
+=
+
+==
+
+=
+
+==
+
+JAVASCRIPT
+
+Keep script at the end of body
+
+===== -->
+
+<script src="js/see-doctor.js"></script>
+<script src="js/doctor-info.js"></script>
+<script src="js/appointment.js"></script>
+
+</body>
+</HTML>
+

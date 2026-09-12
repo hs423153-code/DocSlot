@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Find the right doctor and book your appointment easily.">
+
+    <title>DocSlot - Doctor Appointment Booking</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-container">
+
+            <!-- Logo -->
+            <a href="index.html" class="site-logo">
+                DocSlot
+            </a>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+
+                <a href="index.html" class="nav-link active">
+                    Home
+                </a>
+
+                <a href="see-doctor.html" class="nav-link">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html" class="nav-link">
+                    Home Service
+                </a>
+
+                <a href="contact.html" class="nav-link">
+                    Contact
+                </a>
+
+            </nav>
+
+            <!-- Mobile menu button
+                 JS/CSS se later hamburger banega -->
+            <button class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+     HERO SLIDER
+================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-slider" id="heroSlider">
+
+        <!-- SLIDE 1 -->
+        <div class="hero-slide active">
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        Your Health, Our Priority
+                    </span>
+
+                    <h1>
+                        Find the Right Doctor.
+                        <br>
+                        Book Your Appointment.
+                    </h1>
+
+                    <p>
+                        Find trusted doctors by specialization,
+                        location and availability, and book an
+                        appointment at your convenience.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="product.html"
+                            class="btn btn-primary">
+                            Find a Doctor
+                        </a>
+
+                        <a href="home-service.html"
+                            class="btn btn-secondary">
+                            Home Service
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 2 -->
+        <div class="hero-slide">
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        Healthcare Made Simple
+                    </span>
+
+                    <h1>
+                        Quality Healthcare.
+                        <br>
+                        Just a Few Clicks Away.
+                    </h1>
+
+                    <p>
+                        Explore verified doctors, check their
+                        availability and choose the appointment
+                        that works best for you.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="product.html"
+                            class="btn btn-primary">
+                            Explore Doctors
+                        </a>
+
+                        <a href="contact.html"
+                            class="btn btn-secondary">
+                            Contact Us
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 3 -->
+        <div class="hero-slide">
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        Care At Your Doorstep
+                    </span>
+
+                    <h1>
+                        Need Healthcare
+                        <br>
+                        Without Leaving Home?
+                    </h1>
+
+                    <p>
+                        Request convenient home healthcare
+                        services from trusted professionals
+                        whenever you need them.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="home-service.html"
+                            class="btn btn-primary">
+                            Book Home Service
+                        </a>
+
+                        <a href="product.html"
+                            class="btn btn-secondary">
+                            See Doctors
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 4 -->
+        <div class="hero-slide">
+
+            <div class="container hero-container">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        Trusted Healthcare
+                    </span>
+
+                    <h1>
+                        Which Doctor ?.
+                        <br>
+                        Ask AI!
+                    </h1>
+
+                    <p>
+                        Don,t know what are the disease you have
+                        No Problem buddy Ask Symptoms to AI
+                        And Choose Specialist you can.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="AI-help.html"
+                            class="btn btn-primary">
+                             AI Support
+                        </a>
+
+                        <a href="contact.html"
+                            class="btn btn-secondary">
+                            Get Help
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SLIDER ARROWS
+    ================================================== -->
+
+    <button
+        type="button"
+        class="hero-arrow hero-arrow-left"
+        id="heroPrev"
+        aria-label="Previous slide">
+
+        ‹
+
+    </button>
+
+
+    <button
+        type="button"
+        class="hero-arrow hero-arrow-right"
+        id="heroNext"
+        aria-label="Next slide">
+
+        ›
+
+    </button>
+
+
+    <!-- =================================================
+         SLIDER DOTS
+    ================================================== -->
+
+    <div class="hero-dots" id="heroDots">
+
+        <button
+            type="button"
+            class="hero-dot active"
+            data-slide="0"
+            aria-label="Go to slide 1">
+        </button>
+
+        <button
+            type="button"
+            class="hero-dot"
+            data-slide="1"
+            aria-label="Go to slide 2">
+        </button>
+
+        <button
+            type="button"
+            class="hero-dot"
+            data-slide="2"
+            aria-label="Go to slide 3">
+        </button>
+
+        <button
+            type="button"
+            class="hero-dot"
+            data-slide="3"
+            aria-label="Go to slide 4">
+        </button>
+
+    </div>
+
+</section>
+
+
+        <!-- =================================================
+     BEST DOCTORS SECTION
+================================================== -->
+
+<section class="best-doctors-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                Featured
+            </span>
+
+            <h2>
+                Best Doctors
+            </h2>
+
+            <p>
+                Explore some of our featured doctors
+                and find the right specialist for you.
+            </p>
+
+        </div>
+
+
+        <!--
+            Best Doctor cards will be generated
+            automatically by JavaScript.
+        -->
+
+        <div
+            class="doctor-featured-container"
+            id="bestDoctorsContainer">
+
+            <!-- JS GENERATED BEST DOCTORS -->
+
+        </div>
+
+
+        <!-- More Doctors Button -->
+
+        <a
+            href="see-doctor.html"
+            class="view-all-doctors">
+
+            See All Doctors
+
+        </a>
+
+    </div>
+
+</section>
+
+
+        <!-- =================================================
+             WHY CHOOSE US SECTION
+        ================================================== -->
+
+        <section class="why-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        Why Choose Us?
+                    </span>
+
+                    <h2>
+                        Healthcare Made Simple
+                    </h2>
+
+                    <p>
+                        Everything you need to find and book
+                        healthcare services in one place.
+                    </p>
+
+                </div>
+
+
+                <div class="why-cards">
+
+
+                    <!-- Why Card 1 -->
+
+                    <article class="why-card">
+
+                        <div class="why-icon">
+                            <!-- Icon will be added through CSS/JS later -->
+                            +
+                        </div>
+
+                        <h3>
+                            Save Time
+                        </h3>
+
+                        <p>
+                            Find suitable doctors and available
+                            appointments without unnecessary
+                            waiting.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Why Card 2 -->
+
+                    <article class="why-card">
+
+                        <div class="why-icon">
+                            +
+                        </div>
+
+                        <h3>
+                            Smart Appointment
+                        </h3>
+
+                        <p>
+                            Choose your preferred date and
+                            available time slot easily.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Why Card 3 -->
+
+                    <article class="why-card">
+
+                        <div class="why-icon">
+                            +
+                        </div>
+
+                        <h3>
+                            Reliable Care
+                        </h3>
+
+                        <p>
+                            Explore doctors with their
+                            specialization, experience and
+                            patient reviews.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HOME SERVICE PREVIEW
+        ================================================== -->
+
+        <section class="home-service-preview">
+
+            <div class="container">
+
+                <div class="home-service-content">
+
+                    <span class="section-label">
+                        Home Healthcare
+                    </span>
+
+                    <h2>
+                        Need Care at Home?
+                    </h2>
+
+                    <p>
+                        Book home-care assistance for elderly
+                        and patients who need support at home.
+                    </p>
+
+                    <a href="home-service.html"
+                        class="btn btn-primary">
+
+                        Book Home Service
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI HELP PREVIEW
+        ================================================== -->
+
+        <section class="ai-help-preview">
+
+            <div class="container">
+
+                <div class="ai-help-content">
+
+                    <span class="section-label">
+                        AI Health Assistant
+                    </span>
+
+                    <h2>
+                        Not Sure Which Doctor to See?
+                    </h2>
+
+                    <p>
+                        Describe your symptoms and get general
+                        guidance about which type of healthcare
+                        professional may be appropriate.
+                    </p>
+
+                    <a href="AI-help.html"
+                        class="btn btn-secondary">
+
+                        Ask AI Assistant
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-container">
+
+
+            <!-- Footer Brand -->
+
+            <div class="footer-brand">
+
+                <a href="index.html"
+                    class="footer-logo">
+
+                    DocSlot
+
+                </a>
+
+                <p>
+                    Making doctor appointments simpler,
+                    faster and more convenient.
+                </p>
+
+            </div>
+
+
+            <!-- Company -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="see-doctor.html">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Home Service
+                </a>
+
+                <a href="contact.html">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+            <!-- Help -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Help
+                </h3>
+
+                <a href="AI.html">
+                    Ask AI
+                </a>
+
+                <a href="see-doctor.html">
+                    Book Appointment
+                </a>
+
+                <a href="contact.html">
+                    Contact Support
+                </a>
+
+            </div>
+
+
+            <!-- Social / Extra -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="see-doctor.html">
+                    Find a Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Ward Boy Service
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 DocSlot. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script src="js/doctor-info.js"></script>
+    <script src="js/see-doctor.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

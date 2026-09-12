@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Home Service | DocSlot</title>
+
+    <link rel="stylesheet" href="css/home-service.css">
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-container">
+
+            <!-- Logo -->
+            <a href="index.html" class="site-logo">
+                DocSlot
+            </a>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+
+                <a href="index.html" class="nav-link">
+                    Home
+                </a>
+
+                <a href="see-doctor.html" class="nav-link">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html" class="nav-link active">
+                    Home Service
+                </a>
+
+                <a href="contact.html" class="nav-link">
+                    Contact
+                </a>
+
+            </nav>
+
+            <!-- Mobile menu button
+                 JS/CSS se later hamburger banega -->
+            <button class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+<main>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="home-hero">
+
+    <div class="home-container home-hero-content">
+
+        <span class="section-label">
+            CARE AT YOUR DOORSTEP
+        </span>
+
+        <h1>
+            Healthcare at Home,
+            <br>
+            <span>When You Need It.</span>
+        </h1>
+
+        <p>
+            Book trusted home healthcare assistance for
+            basic care, elderly support, first aid and
+            other convenient healthcare needs.
+        </p>
+
+        <a href="#services" class="primary-btn">
+            Explore Services
+            <i class="fa-solid fa-arrow-down"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOME SERVICE CATEGORIES
+========================================================= -->
+
+<section class="services-section" id="services">
+
+    <div class="home-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                HOME SERVICES
+            </span>
+
+            <h2>
+                Care You Can Book
+            </h2>
+
+            <p>
+                Choose the service you need and book a
+                trusted home care team.
+            </p>
+
+        </div>
+
+
+        <div class="service-grid">
+
+            <!-- SERVICE 1 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <h3>
+                    Basic Checkup
+                </h3>
+
+                <p>
+                    BP, sugar and temperature checks
+                    at your home.
+                </p>
+
+                <button
+                    class="service-book-btn"
+                    data-service="Basic Checkup">
+
+                    Book Now
+
+                </button>
+
+            </article>
+
+
+            <!-- SERVICE 2 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    <i class="fa-solid fa-kit-medical"></i>
+                </div>
+
+                <h3>
+                    Wound Dressing / First Aid
+                </h3>
+
+                <p>
+                    Basic wound dressing and first-aid
+                    assistance at home.
+                </p>
+
+                <button
+                    class="service-book-btn"
+                    data-service="Wound Dressing">
+
+                    Book Now
+
+                </button>
+
+            </article>
+
+
+            <!-- SERVICE 3 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    <i class="fa-solid fa-syringe"></i>
+                </div>
+
+                <h3>
+                    Injection / Medicine
+                </h3>
+
+                <p>
+                    Assistance with prescribed injections
+                    and medicine administration.
+                </p>
+
+                <button
+                    class="service-book-btn"
+                    data-service="Injection / Medicine">
+
+                    Book Now
+
+                </button>
+
+            </article>
+
+
+            <!-- SERVICE 4 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    <i class="fa-solid fa-person-cane"></i>
+                </div>
+
+                <h3>
+                    Elderly Care Assistance
+                </h3>
+
+                <p>
+                    Mobility assistance and basic
+                    elderly care support.
+                </p>
+
+                <button
+                    class="service-book-btn"
+                    data-service="Elderly Care">
+
+                    Book Now
+
+                </button>
+
+            </article>
+
+
+            <!-- SERVICE 5 -->
+
+            <article class="service-card emergency-card">
+
+                <div class="service-icon">
+                    <i class="fa-solid fa-truck-medical"></i>
+                </div>
+
+                <h3>
+                    Emergency Home Visit
+                </h3>
+
+                <p>
+                    Request a home visit for situations
+                    requiring prompt professional assessment.
+                </p>
+
+                <button
+                    class="service-book-btn"
+                    data-service="Emergency Home Visit">
+
+                    Book Now
+
+                </button>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOME CARE TEAMS
+========================================================= -->
+
+<section class="teams-section">
+
+    <div class="home-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                OUR HOME CARE TEAMS
+            </span>
+
+            <h2>
+                Meet Your Care Team
+            </h2>
+
+            <p>
+                Every team consists of a junior doctor
+                and trained home-care support staff.
+            </p>
+
+        </div>
+
+
+        <div class="team-grid" id="teamGrid">
+            <!-- JS generates team cards -->
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DEMO DOCTOR DASHBOARD
+========================================================= -->
+
+<section class="dashboard-section">
+
+    <div class="home-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                DEMO WORKFLOW
+            </span>
+
+            <h2>
+                Junior Doctor Dashboard
+            </h2>
+
+            <p>
+                Simulated home-visit status management
+                for the project demonstration.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-top">
+
+                <div>
+                    <span class="dashboard-tag">
+                        DEMO VISIT
+                    </span>
+
+                    <h3 id="dashboardTeam">
+                        Home Care Team 1
+                    </h3>
+                </div>
+
+                <span
+                    class="status-badge pending"
+                    id="dashboardStatus">
+
+                    Pending
+
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-info">
+
+                <div>
+                    <span>Patient</span>
+                    <strong id="dashboardPatient">
+                        Demo Patient
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Visit</span>
+                    <strong id="dashboardVisit">
+                        Not booked
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Reason</span>
+                    <strong id="dashboardReason">
+                        —
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-actions">
+
+                <button
+                    class="resolve-btn"
+                    id="resolveVisit">
+
+                    <i class="fa-solid fa-check"></i>
+                    Resolved at Home
+
+                </button>
+
+                <button
+                    class="refer-btn"
+                    id="referVisit">
+
+                    <i class="fa-solid fa-hospital"></i>
+                    Refer to Hospital
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="escalation-result"
+                id="escalationResult"
+                hidden>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     TEAM DETAILS MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="teamModal"
+    aria-hidden="true">
+
+    <div class="team-modal">
+
+        <button
+            class="modal-close"
+            id="closeTeamModal">
+
+            ×
+
+        </button>
+
+
+        <div class="team-modal-header">
+
+            <div class="team-modal-image" id="modalTeamImage">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <div>
+
+                <span class="team-id" id="modalTeamId">
+                    Home Care Team
+                </span>
+
+                <h2 id="modalTeamName">
+                    Home Care Team 1
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-detail-grid">
+
+            <div>
+                <span>Junior Doctor</span>
+                <strong id="modalDoctor">
+                    —
+                </strong>
+            </div>
+
+            <div>
+                <span>Qualification</span>
+                <strong id="modalQualification">
+                    —
+                </strong>
+            </div>
+
+            <div>
+                <span>Ward Boy</span>
+                <strong id="modalWardBoy">
+                    —
+                </strong>
+            </div>
+
+            <div>
+                <span>Experience</span>
+                <strong id="modalExperience">
+                    —
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="modal-services">
+
+            <h3>
+                Services Provided
+            </h3>
+
+            <div id="modalServices">
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn full-btn"
+            id="modalBookVisit">
+
+            Book Home Visit
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HOME VISIT BOOKING MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="bookingModal"
+    aria-hidden="true">
+
+    <div class="booking-modal">
+
+        <button
+            class="modal-close"
+            id="closeBookingModal">
+
+            ×
+
+        </button>
+
+
+        <!-- ================================================
+             STEP 1
+        ================================================= -->
+
+        <div
+            class="booking-step active"
+            id="bookingStep1">
+
+            <span class="step-label">
+                STEP 1 OF 3
+            </span>
+
+            <h2>
+                Select Visit Date
+            </h2>
+
+            <p>
+                Choose a date for your home visit.
+            </p>
+
+
+            <div class="calendar-header">
+
+                <button id="prevMonth">
+                    ‹
+                </button>
+
+                <strong id="calendarMonth">
+                    Month
+                </strong>
+
+                <button id="nextMonth">
+                    ›
+                </button>
+
+            </div>
+
+
+            <div
+                class="calendar-weekdays">
+
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+
+            </div>
+
+
+            <div
+                class="calendar-days"
+                id="calendarDays">
+
+            </div>
+
+
+            <button
+                class="primary-btn next-step-btn"
+                id="dateNext"
+                disabled>
+
+                Continue
+
+            </button>
+
+        </div>
+
+
+        <!-- ================================================
+             STEP 2
+        ================================================= -->
+
+        <div
+            class="booking-step"
+            id="bookingStep2">
+
+            <span class="step-label">
+                STEP 2 OF 3
+            </span>
+
+            <h2>
+                Select Time
+            </h2>
+
+            <p id="selectedDateText">
+                Select an available time.
+            </p>
+
+
+            <div
+                class="time-slots"
+                id="homeTimeSlots">
+
+            </div>
+
+
+            <button
+                class="primary-btn next-step-btn"
+                id="timeNext"
+                disabled>
+
+                Continue
+
+            </button>
+
+        </div>
+
+
+        <!-- ================================================
+             STEP 3
+        ================================================= -->
+
+        <div
+            class="booking-step"
+            id="bookingStep3">
+
+            <span class="step-label">
+                STEP 3 OF 3
+            </span>
+
+            <h2>
+                Patient Details
+            </h2>
+
+            <p>
+                Enter the information required for your
+                home visit.
+            </p>
+
+
+            <form id="homeBookingForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Patient Full Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="homePatientName"
+                            required
+                            placeholder="Enter full name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Patient Age *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="homePatientAge"
+                            min="1"
+                            max="120"
+                            required
+                            placeholder="Age">
+
+                    </div>
+
+
+                    <div
+                        class="form-group full-width">
+
+                        <label>
+                            Patient Address *
+                        </label>
+
+                        <textarea
+                            id="homePatientAddress"
+                            required
+                            rows="3"
+                            placeholder="Enter complete home address"></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Emergency Contact *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="homeEmergencyContact"
+                            required
+                            placeholder="Family member's number">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Reason for Visit *
+                        </label>
+
+                        <select
+                            id="homeVisitReason"
+                            required>
+
+                            <option value="">
+                                Select reason
+                            </option>
+
+                            <option value="BP Check">
+                                BP Check
+                            </option>
+
+                            <option value="Sugar Check">
+                                Sugar Check
+                            </option>
+
+                            <option value="Wound Dressing">
+                                Wound Dressing
+                            </option>
+
+                            <option value="Elderly Care">
+                                Elderly Care
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="homePatientMobile"
+                            placeholder="For confirmation">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="homePatientEmail"
+                            placeholder="For confirmation">
+
+                    </div>
+
+                </div>
+
+
+                <p class="form-note">
+                    Enter either a mobile number or email
+                    for booking confirmation.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn full-btn">
+
+                    Confirm Home Visit
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ================================================
+             SUCCESS
+        ================================================= -->
+
+        <div
+            class="booking-step booking-success"
+            id="bookingSuccess"
+            hidden>
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Home Visit Booked!
+            </h2>
+
+            <div
+                class="confirmation-box"
+                id="confirmationBox">
+
+            </div>
+
+            <button
+                class="primary-btn"
+                id="closeSuccess">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-container">
+
+
+            <!-- Footer Brand -->
+
+            <div class="footer-brand">
+
+                <a href="index.html"
+                    class="footer-logo">
+
+                    DocSlot
+
+                </a>
+
+                <p>
+                    Making doctor appointments simpler,
+                    faster and more convenient.
+                </p>
+
+            </div>
+
+
+            <!-- Company -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="see-doctor.html">
+                    See Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Home Service
+                </a>
+
+                <a href="contact.html">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+            <!-- Help -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Help
+                </h3>
+
+                <a href="AI.html">
+                    Ask AI
+                </a>
+
+                <a href="see-doctor.html">
+                    Book Appointment
+                </a>
+
+                <a href="contact.html">
+                    Contact Support
+                </a>
+
+            </div>
+
+
+            <!-- Social / Extra -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="see-doctor.html">
+                    Find a Doctor
+                </a>
+
+                <a href="home-service.html">
+                    Ward Boy Service
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 DocSlot. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+<script src="js/home-service.js"></script>
+
+</body>
+</html>
