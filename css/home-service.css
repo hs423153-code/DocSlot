@@ -1,0 +1,1322 @@
+/* =========================================================
+   HOME SERVICE
+========================================================= */
+
+:root {
+    --primary: #087f7b;
+    --primary-dark: #05625f;
+    --dark: #142323;
+    --muted: #667575;
+    --white: #ffffff;
+    --bg: #f5fbfa;
+    --border: #dcebea;
+    --danger: #d9534f;
+    --success: #16845b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: var(--dark);
+    background: var(--white);
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.home-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+/* =====================================================
+   4. HEADER
+===================================================== */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+
+.header-container {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+/* Logo */
+
+.site-logo {
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    color: var(--dark);
+
+    transition: color 0.25s ease;
+
+}
+
+
+.site-logo:hover {
+
+    color: var(--primary);
+
+}
+
+
+/* Navigation */
+
+.main-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 34px;
+
+}
+
+
+.nav-link {
+
+    position: relative;
+
+    padding: 27px 0;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: color 0.25s ease;
+
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+
+    color: var(--primary);
+
+}
+
+
+.nav-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 18px;
+
+    width: 0;
+
+    height: 2px;
+
+    background: var(--primary);
+
+    transition: width 0.25s ease;
+
+}
+
+
+.nav-link:hover::after,
+.nav-link.active::after {
+
+    width: 100%;
+
+}
+
+
+/* =====================================================
+   5. MOBILE MENU
+===================================================== */
+
+.menu-toggle {
+
+    display: none;
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+
+.menu-toggle span {
+
+    width: 23px;
+
+    height: 2px;
+
+    background: var(--dark);
+
+    transition: 0.25s ease;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.home-hero {
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(8,127,123,.14),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #eef9f8,
+            #ffffff
+        );
+}
+
+.home-hero-content {
+    padding: 80px 0;
+}
+
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+.home-hero h1 {
+    max-width: 800px;
+
+    margin: 0 0 22px;
+
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+
+    letter-spacing: -3px;
+}
+
+.home-hero h1 span {
+    color: var(--primary);
+}
+
+.home-hero p {
+    max-width: 650px;
+
+    margin-bottom: 32px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 48px;
+
+    padding: 0 23px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--primary);
+    color: white;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: .25s ease;
+}
+
+.primary-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.full-btn {
+    width: 100%;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.services-section,
+.teams-section,
+.dashboard-section {
+    padding: 90px 0;
+}
+
+.teams-section {
+    background: var(--bg);
+}
+
+.dashboard-section {
+    background: #f8fafa;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    margin: 0 0 12px;
+
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -1.5px;
+}
+
+.section-heading p {
+    margin: 0;
+
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SERVICE CARDS
+========================================================= */
+
+.service-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.service-card {
+    padding: 25px;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.04);
+
+    transition: .25s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(8,127,123,.10);
+}
+
+.service-icon {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 13px;
+
+    background: rgba(8,127,123,.10);
+    color: var(--primary);
+
+    font-size: 22px;
+}
+
+.service-card h3 {
+    margin: 0 0 10px;
+
+    font-size: 17px;
+}
+
+.service-card p {
+    min-height: 72px;
+
+    margin: 0 0 20px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.service-book-btn {
+    width: 100%;
+
+    min-height: 42px;
+
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+
+    background: white;
+    color: var(--primary);
+
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.service-book-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* =========================================================
+   TEAM CARDS
+========================================================= */
+
+.team-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.team-card {
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.05);
+}
+
+.team-photo {
+    height: 210px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e4f5f3,
+            #f7fbfb
+        );
+
+    color: var(--primary);
+
+    font-size: 60px;
+}
+
+.team-photo i:last-child {
+    font-size: 48px;
+}
+
+.team-info {
+    padding: 24px;
+}
+
+.team-info h3 {
+    margin: 0 0 15px;
+}
+
+.team-meta {
+    display: grid;
+    gap: 9px;
+
+    margin-bottom: 20px;
+}
+
+.team-meta span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.team-meta strong {
+    color: var(--dark);
+}
+
+.rating {
+    color: #e3a62f;
+}
+
+.view-team-btn {
+    width: 100%;
+
+    min-height: 44px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: var(--dark);
+    color: white;
+
+    font-weight: 700;
+}
+
+.view-team-btn:hover {
+    background: var(--primary);
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-card {
+    max-width: 850px;
+
+    padding: 28px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.05);
+}
+
+.dashboard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-tag {
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.dashboard-top h3 {
+    margin: 7px 0 0;
+}
+
+.status-badge {
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-badge.pending {
+    background: #fff5dc;
+    color: #a66a00;
+}
+
+.status-badge.resolved {
+    background: #e3f7ed;
+    color: var(--success);
+}
+
+.status-badge.referred {
+    background: #ffe7e4;
+    color: var(--danger);
+}
+
+.dashboard-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    padding: 25px 0;
+}
+
+.dashboard-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dashboard-info span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.dashboard-info strong {
+    font-size: 14px;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.resolve-btn,
+.refer-btn {
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+}
+
+.resolve-btn {
+    border: none;
+
+    background: #e3f7ed;
+    color: var(--success);
+}
+
+.refer-btn {
+    border: none;
+
+    background: #ffe7e4;
+    color: var(--danger);
+}
+
+.escalation-result {
+    margin-top: 22px;
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #fff4f2;
+    border: 1px solid #ffd5cf;
+}
+
+.escalation-result h4 {
+    margin-top: 0;
+}
+
+.ambulance-btn {
+    margin-top: 12px;
+
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--danger);
+    color: white;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 500;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(10,25,25,.55);
+
+    backdrop-filter: blur(8px);
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.team-modal,
+.booking-modal {
+    position: relative;
+
+    width: min(650px, 100%);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.2);
+}
+
+.booking-modal {
+    width: min(720px, 100%);
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f5f5;
+
+    color: var(--dark);
+
+    font-size: 24px;
+}
+
+.modal-close:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.team-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 28px;
+}
+
+.team-modal-image {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    border-radius: 15px;
+
+    background: #e5f5f3;
+    color: var(--primary);
+
+    font-size: 28px;
+}
+
+.team-id {
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.team-modal-header h2 {
+    margin: 5px 0 0;
+}
+
+.team-detail-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.team-detail-grid div {
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #f7fafa;
+}
+
+.team-detail-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.team-detail-grid strong {
+    font-size: 14px;
+}
+
+.modal-services h3 {
+    margin-bottom: 12px;
+}
+
+.modal-service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 25px;
+}
+
+.modal-service-item {
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    background: #e8f6f5;
+    color: var(--primary);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BOOKING
+========================================================= */
+
+.booking-step {
+    display: none;
+}
+
+.booking-step.active {
+    display: block;
+}
+
+.step-label {
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.booking-step h2 {
+    margin: 8px 0 8px;
+
+    font-size: 28px;
+}
+
+.booking-step > p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 25px 0 15px;
+}
+
+.calendar-header button {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 20px;
+}
+
+.calendar-header button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 7px;
+}
+
+.calendar-weekdays span {
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.calendar-days {
+    margin-top: 10px;
+}
+
+.calendar-day {
+    min-height: 40px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    background: #f5f8f8;
+
+    cursor: pointer;
+}
+
+.calendar-day:hover:not(:disabled) {
+    border-color: var(--primary);
+}
+
+.calendar-day.selected {
+    background: var(--primary);
+    color: white;
+}
+
+.calendar-day:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+.next-step-btn {
+    width: 100%;
+
+    margin-top: 25px;
+}
+
+.time-slots {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+}
+
+.time-slot {
+    min-height: 44px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: white;
+
+    color: var(--dark);
+
+    font-weight: 600;
+}
+
+.time-slot:hover,
+.time-slot.selected {
+    border-color: var(--primary);
+
+    background: var(--primary);
+    color: white;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+
+    margin-top: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(8,127,123,.08);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-note {
+    margin: 18px 0 !important;
+
+    font-size: 12px !important;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.booking-success {
+    text-align: center;
+}
+
+.success-icon {
+    width: 65px;
+    height: 65px;
+
+    display: grid;
+    place-items: center;
+
+    margin: 10px auto 20px;
+
+    border-radius: 50%;
+
+    background: #e3f7ed;
+    color: var(--success);
+
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.confirmation-box {
+    margin: 20px 0;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #f4f9f9;
+
+    text-align: left;
+
+    line-height: 1.8;
+}
+
+/* =====================================================
+   16. FOOTER
+===================================================== */
+
+.site-footer {
+
+    background: var(--dark);
+
+    color: var(--white);
+
+    padding-top: 70px;
+
+}
+
+
+.footer-container {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 50px;
+
+    padding-bottom: 60px;
+
+}
+
+
+/* Brand */
+
+.footer-logo {
+
+    display: inline-block;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    margin-bottom: 15px;
+
+}
+
+
+.footer-brand p {
+
+    max-width: 310px;
+
+    color: #aab6b8;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* Footer columns */
+
+.footer-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+}
+
+
+.footer-column h3 {
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.footer-column a {
+
+    color: #aab6b8;
+
+    font-size: 13px;
+
+    transition: color 0.2s ease;
+
+}
+
+
+.footer-column a:hover {
+
+    color: var(--white);
+
+}
+
+
+/* Footer bottom */
+
+.footer-bottom {
+
+    border-top:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
+
+    padding: 20px 0;
+
+}
+
+
+.footer-bottom p {
+
+    color: #899799;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .service-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .team-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar nav {
+        display: none;
+    }
+
+    .home-hero {
+        min-height: 600px;
+    }
+
+    .home-hero h1 {
+        font-size: 43px;
+    }
+
+    .service-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-info {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-actions {
+        flex-direction: column;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .time-slots {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .team-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .services-section,
+    .teams-section,
+    .dashboard-section {
+        padding: 65px 0;
+    }
+
+    .home-hero h1 {
+        font-size: 36px;
+        letter-spacing: -1.5px;
+    }
+
+    .team-modal,
+    .booking-modal {
+        padding: 22px;
+    }
+
+    .calendar-weekdays,
+    .calendar-days {
+        gap: 4px;
+    }
+
+    .calendar-day {
+        min-height: 36px;
+    }
+}
