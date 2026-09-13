@@ -1,0 +1,407 @@
+/* =========================================
+   APPOINTMENT BOOKING MODAL
+========================================= */
+
+#appointmentModal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(10, 25, 25, 0.55);
+    backdrop-filter: blur(8px);
+}
+
+#appointmentModal.open {
+    display: flex;
+}
+
+
+/* =========================================
+   APPOINTMENT MODAL BOX
+========================================= */
+
+.appointment-modal {
+    position: relative;
+
+    width: min(720px, 100%);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 32px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+#closeAppointmentModal {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f5f5;
+    color: var(--dark);
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+#closeAppointmentModal:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+
+/* =========================================
+   APPOINTMENT HEADER
+========================================= */
+
+.appointment-header {
+    margin-bottom: 28px;
+    padding-right: 40px;
+}
+
+.appointment-header .section-label {
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.appointment-header h2 {
+    margin: 8px 0 6px;
+
+    color: var(--dark);
+
+    font-size: 28px;
+}
+
+#appointmentDoctorName {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BOOKING STEPS
+========================================= */
+
+.booking-step {
+    padding-top: 5px;
+}
+
+.booking-step[hidden] {
+    display: none;
+}
+
+.booking-step h3 {
+    margin: 0 0 8px;
+
+    color: var(--dark);
+
+    font-size: 20px;
+}
+
+.booking-step > label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--dark);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   DATE INPUT
+========================================= */
+
+#appointmentDate {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--dark);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+#appointmentDate:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.08);
+}
+
+
+/* =========================================
+   CONTINUE BUTTON
+========================================= */
+
+.continue-btn,
+.confirm-booking-btn {
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 13px 18px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.continue-btn:hover:not(:disabled),
+.confirm-booking-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.continue-btn:disabled,
+.confirm-booking-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   TIME SLOTS
+========================================= */
+
+.time-slots {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.time-slot {
+    min-height: 44px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--dark);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.time-slot:hover {
+    border-color: var(--primary);
+}
+
+.time-slot.selected {
+    border-color: var(--primary);
+
+    background: var(--primary);
+    color: #ffffff;
+}
+
+
+/* =========================================
+   PATIENT FORM
+========================================= */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--dark);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: var(--dark);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.08);
+}
+
+.form-group input::placeholder {
+    color: #9aa5a5;
+}
+
+
+/* =========================================
+   CONFIRMATION NOTE
+========================================= */
+
+.confirmation-note {
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   SUCCESS SCREEN
+========================================= */
+
+.booking-success {
+    text-align: center;
+
+    padding: 30px 10px;
+}
+
+.booking-success[hidden] {
+    display: none;
+}
+
+.success-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #e8f7f1;
+    color: #198754;
+
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.booking-success h2 {
+    margin: 0 0 10px;
+
+    color: var(--dark);
+
+    font-size: 26px;
+}
+
+#confirmationMessage {
+    margin: 0 auto;
+
+    max-width: 500px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    #appointmentModal {
+        padding: 12px;
+    }
+
+    .appointment-modal {
+        padding: 24px 20px;
+
+        border-radius: 16px;
+
+        max-height: 94vh;
+    }
+
+    .appointment-header h2 {
+        font-size: 24px;
+    }
+
+    .time-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .time-slot {
+        font-size: 12px;
+    }
+}

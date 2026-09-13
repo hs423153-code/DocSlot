@@ -1,145 +1,363 @@
 /* =========================================================
-   DOCSLOT — APPOINTMENT BOOKING SYSTEM
+   DOCSLOT AI
+   APPOINTMENT BOOKING SYSTEM
+
+   FLOW:
+
+   SCREEN 1 → CALENDAR
+   SCREEN 2 → TIME SLOTS
+   SCREEN 3 → PATIENT INFO + PAYMENT
+   SCREEN 4 → PAYMENT PROCESSING
+   SCREEN 5 → CONFIRMATION
+
+   Only ONE screen is visible at a time.
 ========================================================= */
+
+
+/* =========================================================
+   BOOKING STATE
+========================================================= */
+
+const bookingState = {
+
+    doctorId: null,
+
+    selectedDate: null,
+
+    selectedSlot: null,
+
+    contactInfo: "",
+
+    appointmentNo: null
+
+};
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+let currentDoctor = null;
+
+let calendarDate = new Date();
+
+let paymentTimer = null;
+
+
+/*
+ * Used to prevent duplicate appointment numbers
+ * during the current page session.
+ */
+const usedAppointmentNumbers = new Set();
 
 
 /* =========================================================
    DOM ELEMENTS
 ========================================================= */
 
-const appointmentModal =
-    document.getElementById("appointmentModal");
+let appointmentModal;
 
-const closeAppointmentModal =
-    document.getElementById("closeAppointmentModal");
+let appointmentDoctorName;
 
-const appointmentDoctorName =
-    document.getElementById("appointmentDoctorName");
+let calendarMonth;
 
+let calendarDays;
 
-/* STEPS */
+let prevMonth;
 
-const dateStep =
-    document.getElementById("dateStep");
+let nextMonth;
 
-const slotStep =
-    document.getElementById("slotStep");
+let selectedDateText;
 
-const patientStep =
-    document.getElementById("patientStep");
+let slotDateText;
 
-const paymentStep =
-    document.getElementById("paymentStep");
+let timeSlots;
 
-const bookingSuccess =
-    document.getElementById("bookingSuccess");
+let slotEmptyMessage;
 
+let patientMobile;
 
-/* CALENDAR */
+let patientEmail;
 
-const calendarMonth =
-    document.getElementById("calendarMonth");
+let appointmentFee;
 
-const calendarDays =
-    document.getElementById("calendarDays");
+let confirmBooking;
 
-const previousMonth =
-    document.getElementById("previousMonth");
+let closeAppointmentModal;
 
-const nextMonth =
-    document.getElementById("nextMonth");
-
-const selectedDateText =
-    document.getElementById("selectedDateText");
-
-
-/* SLOTS */
-
-const timeSlots =
-    document.getElementById("timeSlots");
-
-const selectedDateForSlots =
-    document.getElementById("selectedDateForSlots");
-
-const selectedSlotText =
-    document.getElementById("selectedSlotText");
-
-
-/* CONTACT */
-
-const patientMobile =
-    document.getElementById("patientMobile");
-
-const patientEmail =
-    document.getElementById("patientEmail");
-
-const contactError =
-    document.getElementById("contactError");
-
-
-/* PAYMENT */
-
-const payFeeButton =
-    document.getElementById("payFeeButton");
-
-const qrPaymentBox =
-    document.getElementById("qrPaymentBox");
-
-const demoPaymentSuccess =
-    document.getElementById("demoPaymentSuccess");
-
-
-/* SUCCESS */
-
-const confirmationMessage =
-    document.getElementById("confirmationMessage");
-
-const closeBooking =
-    document.getElementById("closeBooking");
+let closeBooking;
 
 
 /* =========================================================
-   STATE
+   INITIALIZATION
 ========================================================= */
 
-let currentDoctor = null;
+document.addEventListener("DOMContentLoaded", function () {
 
-let selectedDate = null;
+    /* -----------------------------------------------------
+       Get DOM elements
+    ----------------------------------------------------- */
 
-let selectedSlot = null;
+    appointmentModal =
+        document.getElementById("appointmentModal");
 
-let selectedContact = null;
+    appointmentDoctorName =
+        document.getElementById("appointmentDoctorName");
+
+    calendarMonth =
+        document.getElementById("calendarMonth");
+
+    calendarDays =
+        document.getElementById("calendarDays");
+
+    prevMonth =
+        document.getElementById("prevMonth");
+
+    nextMonth =
+        document.getElementById("nextMonth");
+
+    selectedDateText =
+        document.getElementById("selectedDateText");
+
+    slotDateText =
+        document.getElementById("slotDateText");
+
+    timeSlots =
+        document.getElementById("timeSlots");
+
+    slotEmptyMessage =
+        document.getElementById("slotEmptyMessage");
+
+    patientMobile =
+        document.getElementById("patientMobile");
+
+    patientEmail =
+        document.getElementById("patientEmail");
+
+    appointmentFee =
+        document.getElementById("appointmentFee");
+
+    confirmBooking =
+        document.getElementById("confirmBooking");
+
+    closeAppointmentModal =
+        document.getElementById("closeAppointmentModal");
+
+    closeBooking =
+        document.getElementById("closeBooking");
 
 
-/*
-   Calendar starts from CURRENT month.
-*/
+    /* -----------------------------------------------------
+       Validate required elements
+    ----------------------------------------------------- */
 
-const today = new Date();
+    if (!appointmentModal) {
 
-today.setHours(0, 0, 0, 0);
+        console.error(
+            "DocSlot: appointmentModal not found."
+        );
 
-let calendarYear =
-    today.getFullYear();
+        return;
+    }
 
-let calendarMonthIndex =
-    today.getMonth();
+
+    /* =====================================================
+       EVENT LISTENERS
+    ===================================================== */
+
+
+    /* -----------------------------------------------------
+       Previous month
+    ----------------------------------------------------- */
+
+    if (prevMonth) {
+
+        prevMonth.addEventListener(
+            "click",
+            function () {
+
+                changeMonth(-1);
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Next month
+    ----------------------------------------------------- */
+
+    if (nextMonth) {
+
+        nextMonth.addEventListener(
+            "click",
+            function () {
+
+                changeMonth(1);
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Payment button
+    ----------------------------------------------------- */
+
+    if (confirmBooking) {
+
+        confirmBooking.addEventListener(
+            "click",
+            handlePayment
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Close button
+    ----------------------------------------------------- */
+
+    if (closeAppointmentModal) {
+
+        closeAppointmentModal.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                closeAppointment();
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Done button
+    ----------------------------------------------------- */
+
+    if (closeBooking) {
+
+        closeBooking.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                closeAppointment();
+
+            }
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Click outside appointment modal
+    ----------------------------------------------------- */
+
+    appointmentModal.addEventListener(
+        "click",
+        function (event) {
+
+            /*
+             * Only close if the actual overlay itself
+             * was clicked.
+             */
+
+            if (event.target === appointmentModal) {
+
+                closeAppointment();
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       Escape key
+    ----------------------------------------------------- */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                appointmentModal &&
+                !appointmentModal.hidden
+            ) {
+
+                closeAppointment();
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       Initial reset
+    ----------------------------------------------------- */
+
+    resetBookingFlow();
+
+});
 
 
 /* =========================================================
    OPEN APPOINTMENT
 ========================================================= */
 
+/*
+ * doctor-info.js will call this function after placing
+ * doctor ID inside:
+ *
+ * appointmentModal.dataset.doctorId
+ */
 
 function openAppointment() {
 
+    if (!appointmentModal) {
+
+        appointmentModal =
+            document.getElementById("appointmentModal");
+
+    }
+
+
+    if (!appointmentModal) {
+
+        console.error(
+            "DocSlot: Appointment modal not found."
+        );
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Get doctor ID
+    ----------------------------------------------------- */
+
     const doctorId =
-        appointmentModal?.dataset.doctorId;
+        appointmentModal.dataset.doctorId;
+
 
     if (!doctorId) {
 
         console.error(
-            "Doctor ID not found."
+            "DocSlot: Doctor ID missing."
         );
 
         return;
@@ -147,34 +365,18 @@ function openAppointment() {
     }
 
 
-    /*
-       doctorDetails comes from doctor-info.js
-    */
+    /* -----------------------------------------------------
+       Find doctor
+    ----------------------------------------------------- */
 
-    if (
-        typeof doctorDetails === "undefined"
-    ) {
-
-        console.error(
-            "doctorDetails database not found."
-        );
-
-        return;
-
-    }
+    const doctor =
+        getDoctorFromDatabase(doctorId);
 
 
-    currentDoctor =
-        doctorDetails.find(
-            doctor =>
-                doctor.id === doctorId
-        );
-
-
-    if (!currentDoctor) {
+    if (!doctor) {
 
         console.error(
-            "Doctor not found:",
+            "DocSlot: Doctor not found for ID:",
             doctorId
         );
 
@@ -183,17 +385,61 @@ function openAppointment() {
     }
 
 
-    appointmentDoctorName.textContent =
-        currentDoctor.name;
+    /* -----------------------------------------------------
+       Reset previous booking
+    ----------------------------------------------------- */
+
+    resetBookingFlow();
 
 
-    resetBooking();
+    /* -----------------------------------------------------
+       Store doctor
+    ----------------------------------------------------- */
 
+    currentDoctor = doctor;
+
+    bookingState.doctorId =
+        String(doctor.id);
+
+
+    /* -----------------------------------------------------
+       Reset calendar to current month
+    ----------------------------------------------------- */
+
+    calendarDate =
+        new Date();
+
+    calendarDate.setDate(1);
+
+
+    /* -----------------------------------------------------
+       Fill doctor information
+    ----------------------------------------------------- */
+
+    updateDoctorInformation();
+
+
+    /* -----------------------------------------------------
+       Render calendar
+    ----------------------------------------------------- */
 
     renderCalendar();
 
 
+    /* -----------------------------------------------------
+       Show SCREEN 1
+    ----------------------------------------------------- */
+
+    showScreen(1);
+
+
+    /* -----------------------------------------------------
+       Open modal
+    ----------------------------------------------------- */
+
     appointmentModal.hidden = false;
+
+    appointmentModal.classList.add("open");
 
     appointmentModal.setAttribute(
         "aria-hidden",
@@ -204,56 +450,218 @@ function openAppointment() {
         "modal-open"
     );
 
+
+    /* -----------------------------------------------------
+       Focus close button
+    ----------------------------------------------------- */
+
+    if (closeAppointmentModal) {
+
+        setTimeout(
+            function () {
+
+                closeAppointmentModal.focus();
+
+            },
+            50
+        );
+
+    }
+
+}
+
+
+/*
+ * Make function available globally.
+ *
+ * doctor-info.js can call:
+ *
+ * window.openAppointment()
+ */
+
+window.openAppointment =
+    openAppointment;
+
+
+/* =========================================================
+   GET DOCTOR FROM EXISTING DATABASE
+========================================================= */
+
+function getDoctorFromDatabase(doctorId) {
+
+    /*
+     * doctorDetails already exists inside doctor-info.js.
+     *
+     * We intentionally use the existing data.
+     */
+
+    if (
+        typeof doctorDetails === "undefined" ||
+        !Array.isArray(doctorDetails)
+    ) {
+
+        console.error(
+            "DocSlot: doctorDetails array not found."
+        );
+
+        return null;
+
+    }
+
+
+    const normalizedId =
+        String(doctorId);
+
+
+    return doctorDetails.find(
+        function (doctor) {
+
+            return String(doctor.id) === normalizedId;
+
+        }
+    ) || null;
+
 }
 
 
 /* =========================================================
-   CLOSE APPOINTMENT
+   UPDATE DOCTOR INFORMATION
 ========================================================= */
 
-function closeAppointment() {
+function updateDoctorInformation() {
 
-    if (!appointmentModal) return;
+    if (!currentDoctor) {
+
+        return;
+
+    }
 
 
-    appointmentModal.hidden = true;
+    /* -----------------------------------------------------
+       Doctor name
+    ----------------------------------------------------- */
 
-    appointmentModal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+    if (appointmentDoctorName) {
 
-    document.body.classList.remove(
-        "modal-open"
-    );
+        appointmentDoctorName.textContent =
+            currentDoctor.name || "Doctor";
+
+    }
+
+
+    /* -----------------------------------------------------
+       Fee
+    ----------------------------------------------------- */
+
+    const fee =
+        getDoctorFee(currentDoctor);
+
+
+    if (appointmentFee) {
+
+        appointmentFee.textContent =
+            `₹${fee}`;
+
+    }
+
+
+    if (confirmBooking) {
+
+        confirmBooking.textContent =
+            `Pay ₹${fee}`;
+
+    }
 
 }
 
 
-if (closeAppointmentModal) {
+/* =========================================================
+   GET DOCTOR FEE
+========================================================= */
 
-    closeAppointmentModal.addEventListener(
-        "click",
-        closeAppointment
-    );
+function getDoctorFee(doctor) {
+
+    if (!doctor) {
+
+        return 0;
+
+    }
+
+
+    /*
+     * Main expected property:
+     *
+     * doctor.fee
+     */
+
+    const fee =
+        Number(doctor.fee);
+
+
+    if (
+        Number.isFinite(fee) &&
+        fee >= 0
+    ) {
+
+        return fee;
+
+    }
+
+
+    /*
+     * Fallbacks in case your existing database
+     * uses another common property.
+     */
+
+    const fallbackFee =
+        Number(
+            doctor.fees ??
+            doctor.consultationFee ??
+            doctor.consultationFees ??
+            0
+        );
+
+
+    return Number.isFinite(fallbackFee)
+        ? fallbackFee
+        : 0;
 
 }
 
 
-if (appointmentModal) {
+/* =========================================================
+   SHOW ONLY ONE SCREEN
+========================================================= */
 
-    appointmentModal.addEventListener(
-        "click",
-        event => {
+function showScreen(screenNumber) {
 
-            if (
-                event.target ===
-                appointmentModal
-            ) {
+    const screens =
+        document.querySelectorAll(
+            "#appointmentModal .booking-screen"
+        );
 
-                closeAppointment();
 
-            }
+    screens.forEach(
+        function (screen) {
+
+            const screenValue =
+                Number(
+                    screen.dataset.screen
+                );
+
+
+            const shouldShow =
+                screenValue === screenNumber;
+
+
+            screen.hidden =
+                !shouldShow;
+
+
+            screen.classList.toggle(
+                "active",
+                shouldShow
+            );
 
         }
     );
@@ -262,70 +670,133 @@ if (appointmentModal) {
 
 
 /* =========================================================
-   STEP 1 — CALENDAR
+   SCREEN 1 — CALENDAR
 ========================================================= */
 
 function renderCalendar() {
 
-    calendarMonth.textContent =
-        new Date(
-            calendarYear,
-            calendarMonthIndex,
-            1
-        ).toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                year: "numeric"
-            }
-        );
+    if (
+        !calendarDays ||
+        !calendarMonth
+    ) {
 
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Clear previous calendar
+    ----------------------------------------------------- */
 
     calendarDays.innerHTML = "";
 
 
+    /* -----------------------------------------------------
+       Current calendar month
+    ----------------------------------------------------- */
+
+    const year =
+        calendarDate.getFullYear();
+
+    const month =
+        calendarDate.getMonth();
+
+
+    /* -----------------------------------------------------
+       Month heading
+    ----------------------------------------------------- */
+
+    calendarMonth.textContent =
+        new Intl.DateTimeFormat(
+            "en-IN",
+            {
+                month: "long",
+                year: "numeric"
+            }
+        ).format(
+            calendarDate
+        );
+
+
+    /* -----------------------------------------------------
+       First day of month
+    ----------------------------------------------------- */
+
     const firstDay =
         new Date(
-            calendarYear,
-            calendarMonthIndex,
+            year,
+            month,
             1
-        ).getDay();
+        );
 
+
+    /*
+     * JavaScript:
+     *
+     * 0 = Sunday
+     * 1 = Monday
+     * ...
+     * 6 = Saturday
+     */
+
+    const firstWeekday =
+        firstDay.getDay();
+
+
+    /* -----------------------------------------------------
+       Number of days in month
+    ----------------------------------------------------- */
 
     const daysInMonth =
         new Date(
-            calendarYear,
-            calendarMonthIndex + 1,
+            year,
+            month + 1,
             0
         ).getDate();
 
 
-    /*
-       Empty spaces before first day.
-    */
+    /* -----------------------------------------------------
+       Today's date
+    ----------------------------------------------------- */
+
+    const today =
+        startOfDay(
+            new Date()
+        );
+
+
+    /* -----------------------------------------------------
+       Empty cells before first date
+    ----------------------------------------------------- */
 
     for (
         let i = 0;
-        i < firstDay;
+        i < firstWeekday;
         i++
     ) {
 
-        const empty =
-            document.createElement("span");
+        const emptyCell =
+            document.createElement("div");
 
-        empty.className =
-            "calendar-empty";
+        emptyCell.className =
+            "calendar-day empty";
+
+        emptyCell.setAttribute(
+            "aria-hidden",
+            "true"
+        );
 
         calendarDays.appendChild(
-            empty
+            emptyCell
         );
 
     }
 
 
-    /*
-       Generate actual dates.
-    */
+    /* -----------------------------------------------------
+       Generate actual dates
+    ----------------------------------------------------- */
 
     for (
         let day = 1;
@@ -333,121 +804,119 @@ function renderCalendar() {
         day++
     ) {
 
-        const dateButton =
-            document.createElement("button");
-
-        dateButton.type =
-            "button";
-
-        dateButton.className =
-            "calendar-date";
-
-        dateButton.textContent =
-            day;
-
-
         const date =
             new Date(
-                calendarYear,
-                calendarMonthIndex,
+                year,
+                month,
                 day
             );
 
-        date.setHours(0, 0, 0, 0);
+
+        const button =
+            document.createElement("button");
 
 
-        /*
-           Disable dates before today.
-        */
+        button.type =
+            "button";
 
-        if (date < today) {
+        button.className =
+            "calendar-day";
 
-            dateButton.disabled =
+        button.textContent =
+            String(day);
+
+
+        button.dataset.date =
+            formatDateForState(date);
+
+
+        /* -------------------------------------------------
+           Past date
+        ------------------------------------------------- */
+
+        const isPast =
+            startOfDay(date) < today;
+
+
+        if (isPast) {
+
+            button.disabled =
                 true;
 
-            dateButton.classList.add(
+            button.classList.add(
                 "past-date"
             );
 
         }
 
 
-        /*
-           Disable dates when doctor
-           isn't available that weekday.
-        */
+        /* -------------------------------------------------
+           Doctor availability
+        ------------------------------------------------- */
 
-        const weekday =
-            date.toLocaleDateString(
-                "en-US",
-                {
-                    weekday: "long"
-                }
+        const doctorAvailable =
+            isDoctorAvailableOnDate(
+                date
             );
 
 
-        if (
-            currentDoctor &&
-            currentDoctor.availableDays &&
-            !currentDoctor.availableDays.includes(
-                weekday
-            )
-        ) {
+        if (!doctorAvailable) {
 
-            dateButton.disabled =
+            button.disabled =
                 true;
 
-            dateButton.classList.add(
+            button.classList.add(
                 "doctor-unavailable"
             );
 
         }
 
 
-        /*
-           Today styling.
-        */
+        /* -------------------------------------------------
+           Today
+        ------------------------------------------------- */
 
         if (
-            date.getTime() ===
+            startOfDay(date).getTime() ===
             today.getTime()
         ) {
 
-            dateButton.classList.add(
+            button.classList.add(
                 "today"
             );
 
         }
 
 
-        /*
-           Selected styling.
-        */
+        /* -------------------------------------------------
+           Previously selected date
+        ------------------------------------------------- */
 
         if (
-            selectedDate &&
-            date.getTime() ===
-            selectedDate.getTime()
+            bookingState.selectedDate ===
+            button.dataset.date
         ) {
 
-            dateButton.classList.add(
+            button.classList.add(
                 "selected"
             );
 
         }
 
 
-        /*
-           Click date.
-        */
+        /* -------------------------------------------------
+           Click
+        ------------------------------------------------- */
 
-        if (!dateButton.disabled) {
+        if (!button.disabled) {
 
-            dateButton.addEventListener(
+            button.addEventListener(
                 "click",
-                () => {
+                function () {
 
-                    selectDate(date);
+                    selectDate(
+                        button.dataset.date
+                    );
 
                 }
             );
@@ -456,16 +925,15 @@ function renderCalendar() {
 
 
         calendarDays.appendChild(
-            dateButton
+            button
         );
 
     }
 
 
-    /*
-       Don't allow previous month
-       navigation before current month.
-    */
+    /* -----------------------------------------------------
+       Disable previous month button when at current month
+    ----------------------------------------------------- */
 
     const currentMonthStart =
         new Date(
@@ -477,291 +945,1113 @@ function renderCalendar() {
 
     const displayedMonthStart =
         new Date(
-            calendarYear,
-            calendarMonthIndex,
+            year,
+            month,
             1
         );
 
 
-    previousMonth.disabled =
-        displayedMonthStart <=
-        currentMonthStart;
+    if (prevMonth) {
+
+        prevMonth.disabled =
+            displayedMonthStart <=
+            currentMonthStart;
+
+    }
 
 }
 
 
 /* =========================================================
-   PREVIOUS MONTH
-========================================================= */
-if (previousMonth) {
-
-    previousMonth.addEventListener(
-        "click",
-        () => {
-
-        if (
-            calendarMonthIndex === 0
-        ) {
-
-            calendarYear--;
-
-            calendarMonthIndex = 11;
-
-        } else {
-
-            calendarMonthIndex--;
-
-        }
-
-        renderCalendar();
-
-    }
-);
-};
-
-
-/* =========================================================
-   NEXT MONTH
+   CHANGE CALENDAR MONTH
 ========================================================= */
 
-if (nextMonth) {
+function changeMonth(direction) {
 
-    nextMonth.addEventListener(
-        "click",
-        () => {
+    const today =
+        new Date();
 
-        if (
-            calendarMonthIndex === 11
-        ) {
 
-            calendarYear++;
+    const currentMonth =
+        new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
 
-            calendarMonthIndex = 0;
 
-        } else {
+    const newMonth =
+        new Date(
+            calendarDate.getFullYear(),
+            calendarDate.getMonth() + direction,
+            1
+        );
 
-            calendarMonthIndex++;
 
-        }
+    /*
+     * Never allow navigating before current month.
+     */
 
-        renderCalendar();
+    if (newMonth < currentMonth) {
+
+        return;
 
     }
-);
-};
+
+
+    calendarDate =
+        newMonth;
+
+
+    renderCalendar();
+
+}
 
 
 /* =========================================================
    SELECT DATE
 ========================================================= */
 
-function selectDate(date) {
+function selectDate(dateString) {
 
-    selectedDate = date;
+    if (!dateString) {
 
-    selectedDateText.textContent =
-        formatDate(date);
+        return;
 
-
-    selectedDateForSlots.textContent =
-        formatDate(date);
+    }
 
 
-    renderCalendar();
+    bookingState.selectedDate =
+        dateString;
 
 
-    dateStep.hidden =
-        false;
+    /*
+     * Changing date means previous slot is no longer valid.
+     */
 
-    slotStep.hidden =
-        false;
-
-    patientStep.hidden =
-        true;
-
-    paymentStep.hidden =
-        true;
-
-    bookingSuccess.hidden =
-        true;
-
-
-    selectedSlot =
+    bookingState.selectedSlot =
         null;
 
-    selectedSlotText.textContent =
-        "Select a time slot";
+
+    const selectedDate =
+        parseDateString(
+            dateString
+        );
 
 
-    renderTimeSlots();
+    if (!selectedDate) {
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Display selected date
+    ----------------------------------------------------- */
+
+    if (selectedDateText) {
+
+        selectedDateText.textContent =
+            formatDisplayDate(
+                selectedDate
+            );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Prepare Screen 2
+    ----------------------------------------------------- */
+
+    prepareTimeScreen();
+
+
+    /* -----------------------------------------------------
+       Automatically move to Screen 2
+    ----------------------------------------------------- */
+
+    showScreen(2);
 
 }
 
 
 /* =========================================================
-   STEP 2 — TIME SLOTS
+   SCREEN 2 — TIME SLOTS
 ========================================================= */
 
-function renderTimeSlots() {
+function prepareTimeScreen() {
+
+    if (!currentDoctor) {
+
+        return;
+
+    }
+
+
+    if (!timeSlots) {
+
+        return;
+
+    }
+
 
     timeSlots.innerHTML = "";
 
 
-    if (
-        !currentDoctor ||
-        !currentDoctor.availableHours
-    ) {
+    if (slotEmptyMessage) {
 
-        timeSlots.innerHTML =
-            "<p>No slots available.</p>";
+        slotEmptyMessage.hidden =
+            true;
+
+    }
+
+
+    const selectedDate =
+        parseDateString(
+            bookingState.selectedDate
+        );
+
+
+    if (!selectedDate) {
 
         return;
 
     }
 
 
-    const weekday =
-        selectedDate.toLocaleDateString(
+    /* -----------------------------------------------------
+       Date label
+    ----------------------------------------------------- */
+
+    if (slotDateText) {
+
+        slotDateText.textContent =
+            formatDisplayDate(
+                selectedDate
+            );
+
+    }
+
+
+    /* -----------------------------------------------------
+       Get available ranges
+    ----------------------------------------------------- */
+
+    const ranges =
+        getAvailableTimeRanges(
+            currentDoctor,
+            selectedDate
+        );
+
+
+    /* -----------------------------------------------------
+       Generate 30-minute slots
+    ----------------------------------------------------- */
+
+    const slots =
+        generateTimeSlots(
+            ranges
+        );
+
+
+    if (slots.length === 0) {
+
+        if (slotEmptyMessage) {
+
+            slotEmptyMessage.hidden =
+                false;
+
+        }
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Create buttons
+    ----------------------------------------------------- */
+
+    slots.forEach(
+        function (slot) {
+
+            const button =
+                document.createElement("button");
+
+
+            button.type =
+                "button";
+
+            button.className =
+                "time-slot";
+
+            button.textContent =
+                slot;
+
+            button.dataset.slot =
+                slot;
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    selectTimeSlot(
+                        slot
+                    );
+
+                }
+            );
+
+
+            timeSlots.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SELECT TIME SLOT
+========================================================= */
+
+function selectTimeSlot(slot) {
+
+    if (!slot) {
+
+        return;
+
+    }
+
+
+    bookingState.selectedSlot =
+        slot;
+
+
+    /*
+     * Highlight selected slot.
+     */
+
+    if (timeSlots) {
+
+        const allSlots =
+            timeSlots.querySelectorAll(
+                ".time-slot"
+            );
+
+
+        allSlots.forEach(
+            function (button) {
+
+                button.classList.toggle(
+                    "selected",
+                    button.dataset.slot === slot
+                );
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Prepare payment screen.
+     */
+
+    updatePatientScreen();
+
+
+    /*
+     * Automatically move to Screen 3.
+     */
+
+    showScreen(3);
+
+}
+
+
+/* =========================================================
+   SCREEN 3 — PATIENT INFORMATION
+========================================================= */
+
+function updatePatientScreen() {
+
+    if (!currentDoctor) {
+
+        return;
+
+    }
+
+
+    const fee =
+        getDoctorFee(
+            currentDoctor
+        );
+
+
+    if (appointmentFee) {
+
+        appointmentFee.textContent =
+            `₹${fee}`;
+
+    }
+
+
+    if (confirmBooking) {
+
+        confirmBooking.textContent =
+            `Pay ₹${fee}`;
+
+    }
+
+
+    /*
+     * Clear old information if a new booking flow
+     * reaches this screen.
+     */
+
+    if (patientMobile) {
+
+        patientMobile.value = "";
+
+    }
+
+
+    if (patientEmail) {
+
+        patientEmail.value = "";
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE PAYMENT
+========================================================= */
+
+function handlePayment() {
+
+    if (!currentDoctor) {
+
+        console.error(
+            "DocSlot: No doctor selected."
+        );
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Get contact values
+    ----------------------------------------------------- */
+
+    const phone =
+        patientMobile
+            ? patientMobile.value.trim()
+            : "";
+
+
+    const email =
+        patientEmail
+            ? patientEmail.value.trim()
+            : "";
+
+
+    /* -----------------------------------------------------
+       Validate contact information
+    ----------------------------------------------------- */
+
+    if (!phone && !email) {
+
+        alert(
+            "Please enter either your phone number or email address."
+        );
+
+        if (patientMobile) {
+
+            patientMobile.focus();
+
+        }
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Validate phone if entered
+    ----------------------------------------------------- */
+
+    if (phone) {
+
+        const cleanPhone =
+            phone.replace(
+                /\D/g,
+                ""
+            );
+
+
+        if (
+            cleanPhone.length < 10 ||
+            cleanPhone.length > 15
+        ) {
+
+            alert(
+                "Please enter a valid phone number."
+            );
+
+            patientMobile.focus();
+
+            return;
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       Validate email if entered
+    ----------------------------------------------------- */
+
+    if (email) {
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            !emailPattern.test(email)
+        ) {
+
+            alert(
+                "Please enter a valid email address."
+            );
+
+            patientEmail.focus();
+
+            return;
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       Store contact information
+    ----------------------------------------------------- */
+
+    /*
+     * User may enter either one.
+     *
+     * If both are entered, email is not lost.
+     * We store both in a readable format.
+     */
+
+    if (phone && email) {
+
+        bookingState.contactInfo =
+            `${phone} / ${email}`;
+
+    } else {
+
+        bookingState.contactInfo =
+            phone || email;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Generate appointment number
+    ----------------------------------------------------- */
+
+    bookingState.appointmentNo =
+        generateAppointmentNumber();
+
+
+    /* -----------------------------------------------------
+       Disable payment button
+    ----------------------------------------------------- */
+
+    if (confirmBooking) {
+
+        confirmBooking.disabled =
+            true;
+
+    }
+
+
+    /* -----------------------------------------------------
+       SCREEN 4
+    ----------------------------------------------------- */
+
+    showScreen(4);
+
+
+    /*
+     * Simulate payment processing.
+     */
+
+    if (paymentTimer) {
+
+        clearTimeout(
+            paymentTimer
+        );
+
+    }
+
+
+    paymentTimer =
+        setTimeout(
+            function () {
+
+                paymentTimer =
+                    null;
+
+
+                /*
+                 * Payment completed.
+                 */
+
+                renderConfirmation();
+
+
+                /*
+                 * SCREEN 5
+                 */
+
+                showScreen(5);
+
+
+            },
+            2000
+        );
+
+}
+
+
+/* =========================================================
+   GENERATE UNIQUE APPOINTMENT NUMBER
+========================================================= */
+
+function generateAppointmentNumber() {
+
+    let number;
+
+
+    do {
+
+        number =
+            Math.floor(
+                Math.random() * 900
+            ) + 100;
+
+    } while (
+        usedAppointmentNumbers.has(
+            number
+        )
+    );
+
+
+    usedAppointmentNumbers.add(
+        number
+    );
+
+
+    return number;
+
+}
+
+
+/* =========================================================
+   SCREEN 5 — RENDER CONFIRMATION
+========================================================= */
+
+function renderConfirmation() {
+
+    if (!currentDoctor) {
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Confirmation elements
+    ----------------------------------------------------- */
+
+    const confirmationAppointmentNo =
+        document.getElementById(
+            "confirmationAppointmentNo"
+        );
+
+
+    const confirmationDoctorName =
+        document.getElementById(
+            "confirmationDoctorName"
+        );
+
+
+    const confirmationSpecialist =
+        document.getElementById(
+            "confirmationSpecialist"
+        );
+
+
+    const confirmationAddress =
+        document.getElementById(
+            "confirmationAddress"
+        );
+
+
+    const confirmationDate =
+        document.getElementById(
+            "confirmationDate"
+        );
+
+
+    const confirmationSlot =
+        document.getElementById(
+            "confirmationSlot"
+        );
+
+
+    const confirmationContact =
+        document.getElementById(
+            "confirmationContact"
+        );
+
+
+    const confirmationFee =
+        document.getElementById(
+            "confirmationFee"
+        );
+
+
+    /* -----------------------------------------------------
+       Get values
+    ----------------------------------------------------- */
+
+    const selectedDate =
+        parseDateString(
+            bookingState.selectedDate
+        );
+
+
+    const fee =
+        getDoctorFee(
+            currentDoctor
+        );
+
+
+    /*
+     * Specialization field:
+     *
+     * Existing doctor data uses specialization.
+     *
+     * Fallbacks added so the system does not break if
+     * your object uses another property name.
+     */
+
+    const specialist =
+        currentDoctor.specialization ||
+        currentDoctor.speciality ||
+        currentDoctor.specialty ||
+        "Doctor";
+
+
+    const address =
+    currentDoctor.clinicAddress ||
+    currentDoctor.address ||
+    currentDoctor.location ||
+    "Address not available";
+
+
+    /* -----------------------------------------------------
+       Fill confirmation
+    ----------------------------------------------------- */
+
+    if (confirmationAppointmentNo) {
+
+        confirmationAppointmentNo.textContent =
+            bookingState.appointmentNo;
+
+    }
+
+
+    if (confirmationDoctorName) {
+
+        confirmationDoctorName.textContent =
+            currentDoctor.name ||
+            "Doctor";
+
+    }
+
+
+    if (confirmationSpecialist) {
+
+        confirmationSpecialist.textContent =
+            specialist;
+
+    }
+
+
+    if (confirmationAddress) {
+
+        confirmationAddress.textContent =
+            address;
+
+    }
+
+
+    if (confirmationDate) {
+
+        confirmationDate.textContent =
+            selectedDate
+                ? formatDisplayDate(
+                    selectedDate
+                )
+                : bookingState.selectedDate;
+
+    }
+
+
+    if (confirmationSlot) {
+
+        confirmationSlot.textContent =
+            bookingState.selectedSlot ||
+            "Not available";
+
+    }
+
+
+    if (confirmationContact) {
+
+        confirmationContact.textContent =
+            bookingState.contactInfo ||
+            "Not provided";
+
+    }
+
+
+    if (confirmationFee) {
+
+        confirmationFee.textContent =
+            `₹${fee}`;
+
+    }
+
+}
+
+
+/* =========================================================
+   DOCTOR AVAILABILITY
+========================================================= */
+
+function isDoctorAvailableOnDate(date) {
+
+    if (!currentDoctor) {
+
+        return false;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Doctor availableDays
+    ----------------------------------------------------- */
+
+    const availableDays =
+        Array.isArray(
+            currentDoctor.availableDays
+        )
+            ? currentDoctor.availableDays
+            : [];
+
+
+    if (availableDays.length === 0) {
+
+        return false;
+
+    }
+
+
+    const dayName =
+        new Intl.DateTimeFormat(
             "en-US",
             {
                 weekday: "long"
             }
-        );
-
-
-    const isWeekend =
-        weekday === "Saturday" ||
-        weekday === "Sunday";
-
-
-    let hoursText =
-        isWeekend
-            ? currentDoctor.availableHours.weekends
-            : currentDoctor.availableHours.weekdays;
+        ).format(date);
 
 
     /*
-       Example:
-       "9:00 AM - 5:00 PM"
-    */
+     * Case-insensitive comparison.
+     */
 
-    const parts =
-        hoursText.split("-");
+    const isAvailable =
+        availableDays.some(
+            function (day) {
 
-
-    if (parts.length !== 2) {
-
-        timeSlots.innerHTML =
-            "<p>Timing unavailable.</p>";
-
-        return;
-
-    }
-
-
-    const startMinutes =
-        convertTimeToMinutes(
-            parts[0].trim()
-        );
-
-    const endMinutes =
-        convertTimeToMinutes(
-            parts[1].trim()
-        );
-
-
-    /*
-       Generate 30-minute slots.
-    */
-
-    for (
-        let minutes = startMinutes;
-        minutes + 30 <= endMinutes;
-        minutes += 30
-    ) {
-
-        const start =
-            formatMinutes(minutes);
-
-        const end =
-            formatMinutes(minutes + 30);
-
-
-        const button =
-            document.createElement("button");
-
-        button.type =
-            "button";
-
-        button.className =
-            "time-slot";
-
-        button.textContent =
-            `${start} - ${end}`;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                selectTimeSlot(
-                    `${start} - ${end}`
+                return (
+                    String(day).toLowerCase() ===
+                    dayName.toLowerCase()
                 );
 
             }
         );
 
 
-        timeSlots.appendChild(
-            button
-        );
-
-    }
+    return isAvailable;
 
 }
 
 
 /* =========================================================
-   TIME CONVERSION
+   GET AVAILABLE TIME RANGES
 ========================================================= */
 
-function convertTimeToMinutes(timeString) {
+function getAvailableTimeRanges(
+    doctor,
+    date
+) {
 
-    const match =
-        timeString.match(
-            /(\d+):(\d+)\s*(AM|PM)/i
-        );
+    if (!doctor || !date) {
 
+        return [];
 
-    if (!match) return 0;
-
-
-    let hours =
-        parseInt(match[1]);
-
-    const minutes =
-        parseInt(match[2]);
-
-    const period =
-        match[3].toUpperCase();
+    }
 
 
-    if (
-        period === "PM" &&
-        hours !== 12
-    ) {
+    const day =
+        date.getDay();
 
-        hours += 12;
+
+    const isWeekend =
+        day === 0 ||
+        day === 6;
+
+
+    const availableHours =
+        doctor.availableHours ||
+        {};
+
+
+    /*
+     * Your doctor data structure:
+     *
+     * availableHours: {
+     *     weekdays: "...",
+     *     weekends: "..."
+     * }
+     */
+
+    let hoursText;
+
+
+    if (isWeekend) {
+
+        hoursText =
+            availableHours.weekends ||
+            "";
+
+    } else {
+
+        hoursText =
+            availableHours.weekdays ||
+            "";
 
     }
 
 
     if (
-        period === "AM" &&
-        hours === 12
+        typeof hoursText !== "string" ||
+        !hoursText.trim()
     ) {
 
-        hours = 0;
+        return [];
+
+    }
+
+
+    return parseTimeRanges(
+        hoursText
+    );
+
+}
+
+
+/* =========================================================
+   PARSE TIME RANGES
+========================================================= */
+
+function parseTimeRanges(hoursText) {
+
+    /*
+     * Supports:
+     *
+     * "9:00 AM - 5:00 PM"
+     *
+     * "9:00 AM - 12:00 PM, 5:00 PM - 8:30 PM"
+     *
+     * "10:30 PM - 1:00 AM"
+     *
+     * "Hospital open 24 hours.
+     *  Regular doctor consultation :
+     *  10:00 AM – 2:00 PM , 6:00 PM – 8:00 PM"
+     */
+
+
+    const ranges = [];
+
+
+    /*
+     * Normalize en dash / em dash to normal hyphen.
+     */
+
+    const normalized =
+        hoursText
+            .replace(
+                /[–—]/g,
+                "-"
+            );
+
+
+    /*
+     * Find time pairs using regex.
+     */
+
+    const timePattern =
+        /(\d{1,2}(?::\d{2})?\s*(?:AM|PM))\s*-\s*(\d{1,2}(?::\d{2})?\s*(?:AM|PM))/gi;
+
+
+    let match;
+
+
+    while (
+        (match =
+            timePattern.exec(
+                normalized
+            )) !== null
+    ) {
+
+        const startMinutes =
+            parseTimeToMinutes(
+                match[1]
+            );
+
+
+        const endMinutes =
+            parseTimeToMinutes(
+                match[2]
+            );
+
+
+        if (
+            startMinutes === null ||
+            endMinutes === null
+        ) {
+
+            continue;
+
+        }
+
+
+        ranges.push({
+            start: startMinutes,
+            end: endMinutes
+        });
+
+    }
+
+
+    return ranges;
+
+}
+
+
+/* =========================================================
+   PARSE TIME → MINUTES
+========================================================= */
+
+function parseTimeToMinutes(
+    timeString
+) {
+
+    if (
+        typeof timeString !== "string"
+    ) {
+
+        return null;
+
+    }
+
+
+    const normalized =
+        timeString
+            .trim()
+            .toUpperCase();
+
+
+    const match =
+        normalized.match(
+            /^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/
+        );
+
+
+    if (!match) {
+
+        return null;
+
+    }
+
+
+    let hours =
+        Number(match[1]);
+
+
+    const minutes =
+        Number(
+            match[2] || "0"
+        );
+
+
+    const period =
+        match[3];
+
+
+    if (
+        hours < 1 ||
+        hours > 12 ||
+        minutes < 0 ||
+        minutes > 59
+    ) {
+
+        return null;
+
+    }
+
+
+    if (period === "AM") {
+
+        if (hours === 12) {
+
+            hours = 0;
+
+        }
+
+    } else {
+
+        if (hours !== 12) {
+
+            hours += 12;
+
+        }
 
     }
 
@@ -775,448 +2065,555 @@ function convertTimeToMinutes(timeString) {
 
 
 /* =========================================================
-   FORMAT MINUTES
+   GENERATE 30-MINUTE SLOTS
 ========================================================= */
 
-function formatMinutes(totalMinutes) {
+function generateTimeSlots(
+    ranges
+) {
 
-    let hours =
+    const slots = [];
+
+
+    ranges.forEach(
+        function (range) {
+
+            let start =
+                range.start;
+
+
+            let end =
+                range.end;
+
+
+            /*
+             * Midnight crossing.
+             *
+             * Example:
+             *
+             * 10:30 PM → 1:00 AM
+             *
+             * 22:30 → 01:00
+             *
+             * Therefore end belongs to next day.
+             */
+
+            if (end <= start) {
+
+                end += 24 * 60;
+
+            }
+
+
+            /*
+             * Generate every 30 minutes.
+             *
+             * Do not create a slot starting at the
+             * exact end time.
+             */
+
+            for (
+                let minutes = start;
+                minutes < end;
+                minutes += 30
+            ) {
+
+                /*
+                 * Convert back to 0–1439 for display.
+                 */
+
+                const displayMinutes =
+                    minutes %
+                    (24 * 60);
+
+
+                slots.push(
+                    formatMinutesToTime(
+                        displayMinutes
+                    )
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Remove duplicate slots.
+     */
+
+    return [
+        ...new Set(slots)
+    ];
+
+}
+
+
+/* =========================================================
+   MINUTES → DISPLAY TIME
+========================================================= */
+
+function formatMinutesToTime(
+    totalMinutes
+) {
+
+    const hours24 =
         Math.floor(
             totalMinutes / 60
         );
+
 
     const minutes =
         totalMinutes % 60;
 
 
     const period =
-        hours >= 12
+        hours24 >= 12
             ? "PM"
             : "AM";
 
 
-    if (hours > 12) {
-
-        hours -= 12;
-
-    }
+    let hours12 =
+        hours24 % 12;
 
 
-    if (hours === 0) {
+    if (hours12 === 0) {
 
-        hours = 12;
+        hours12 = 12;
 
     }
 
 
     return (
-        `${hours}:${String(minutes).padStart(2, "0")} ${period}`
+        `${hours12}:` +
+        `${String(minutes).padStart(2, "0")} ` +
+        `${period}`
     );
 
 }
 
 
 /* =========================================================
-   SELECT SLOT
+   FORMAT DATE FOR STATE
 ========================================================= */
 
-function selectTimeSlot(slot) {
-
-    selectedSlot =
-        slot;
-
-    selectedSlotText.textContent =
-        `Selected slot: ${slot}`;
-
-
-    patientStep.hidden =
-        false;
-
-    paymentStep.hidden =
-        true;
-
-    bookingSuccess.hidden =
-        true;
-
-}
-
-
-/* =========================================================
-   CONTACT DETAILS
-========================================================= */
-
-function validateContact() {
-
-    const phone =
-        patientMobile.value.trim();
-
-    const email =
-        patientEmail.value.trim();
-
-
-    const validPhone =
-        /^[6-9]\d{9}$/.test(phone);
-
-
-    const validEmail =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-
-    /*
-       Either phone OR email.
-    */
-
-    if (
-        phone &&
-        validPhone &&
-        !email
-    ) {
-
-        selectedContact = phone;
-
-        return true;
-
-    }
-
-
-    if (
-        email &&
-        validEmail &&
-        !phone
-    ) {
-
-        selectedContact = email;
-
-        return true;
-
-    }
-
-
-    contactError.hidden =
-        false;
-
-    return false;
-
-}
-
-
-/*
-   Clicking outside fields to payment:
-   We'll create the payment button
-   after contact validation.
-*/
-
-const continueToPayment =
-    document.createElement("button");
-
-continueToPayment.type =
-    "button";
-
-continueToPayment.className =
-    "confirm-booking-btn";
-
-continueToPayment.textContent =
-    "Continue to Payment";
-
-
-patientStep.appendChild(
-    continueToPayment
-);
-
-
-continueToPayment.addEventListener(
-    "click",
-    () => {
-
-        contactError.hidden =
-            true;
-
-        if (!validateContact()) {
-
-            return;
-
-        }
-
-
-        paymentStep.hidden =
-            false;
-
-        qrPaymentBox.hidden =
-            true;
-
-    }
-);
-
-
-/* =========================================================
-   STEP 4 — DEMO PAYMENT
-========================================================= */
-
-payFeeButton.addEventListener(
-    "click",
-    () => {
-
-        qrPaymentBox.hidden =
-            false;
-
-        payFeeButton.disabled =
-            true;
-
-        payFeeButton.textContent =
-            "Payment QR Generated";
-
-    }
-);
-
-
-/* =========================================================
-   DEMO PAYMENT SUCCESS
-========================================================= */
-
-demoPaymentSuccess.addEventListener(
-    "click",
-    () => {
-
-        completeBooking();
-
-    }
-);
-
-
-/* =========================================================
-   STEP 5 — CONFIRMATION
-========================================================= */
-
-function completeBooking() {
-
-    const appointmentNumber =
-        generateAppointmentNumber();
-
-
-    const contactLabel =
-        patientMobile.value.trim()
-            ? "Phone No."
-            : "Email";
-
-
-    const contactValue =
-        selectedContact;
-
-
-    confirmationMessage.innerHTML = `
-
-        <div class="confirmation-details">
-
-            <p>
-                <strong>Appointment No.:</strong>
-                ${appointmentNumber}
-            </p>
-
-            <p>
-                <strong>Doctor's Name:</strong>
-                ${currentDoctor.name}
-            </p>
-
-            <p>
-                <strong>Specialist:</strong>
-                ${currentDoctor.specialization}
-            </p>
-
-            <p>
-                <strong>Address:</strong>
-                ${currentDoctor.clinicAddress || currentDoctor.city}
-            </p>
-
-            <p>
-                <strong>Date:</strong>
-                ${formatDate(selectedDate)}
-            </p>
-
-            <p>
-                <strong>Slot:</strong>
-                ${selectedSlot}
-            </p>
-
-            <p>
-                <strong>${contactLabel}:</strong>
-                ${contactValue}
-            </p>
-
-            <p>
-                <strong>Fee Paid:</strong>
-                ₹300
-            </p>
-
-        </div>
-
-        <p class="booking-final-message">
-            You have successfully booked your appointment!
-        </p>
-
-    `;
-
-
-    dateStep.hidden =
-        true;
-
-    slotStep.hidden =
-        true;
-
-    patientStep.hidden =
-        true;
-
-    paymentStep.hidden =
-        true;
-
-    bookingSuccess.hidden =
-        false;
-
-}
-
-
-/* =========================================================
-   APPOINTMENT NUMBER
-========================================================= */
-
-function generateAppointmentNumber() {
-
-    const existing =
-        Number(
-            localStorage.getItem(
-                "docslotAppointmentNumber"
-            ) || "410"
+function formatDateForState(
+    date
+) {
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
         );
 
 
-    const next =
-        existing + 1;
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
 
 
-    localStorage.setItem(
-        "docslotAppointmentNumber",
-        next
+    return (
+        `${year}-${month}-${day}`
     );
-
-
-    return next;
 
 }
 
 
 /* =========================================================
-   FORMAT DATE
+   PARSE YYYY-MM-DD SAFELY
 ========================================================= */
 
-function formatDate(date) {
+function parseDateString(
+    dateString
+) {
 
-    return date.toLocaleDateString(
+    if (
+        typeof dateString !== "string"
+    ) {
+
+        return null;
+
+    }
+
+
+    const parts =
+        dateString.split("-");
+
+
+    if (parts.length !== 3) {
+
+        return null;
+
+    }
+
+
+    const year =
+        Number(parts[0]);
+
+
+    const month =
+        Number(parts[1]);
+
+
+    const day =
+        Number(parts[2]);
+
+
+    if (
+        !Number.isInteger(year) ||
+        !Number.isInteger(month) ||
+        !Number.isInteger(day)
+    ) {
+
+        return null;
+
+    }
+
+
+    return new Date(
+        year,
+        month - 1,
+        day
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT DATE FOR DISPLAY
+========================================================= */
+
+function formatDisplayDate(
+    date
+) {
+
+    if (!(date instanceof Date)) {
+
+        return "";
+
+    }
+
+
+    return new Intl.DateTimeFormat(
         "en-IN",
         {
+            weekday: "long",
             day: "numeric",
             month: "long",
             year: "numeric"
         }
+    ).format(date);
+
+}
+
+
+/* =========================================================
+   START OF DAY
+========================================================= */
+
+function startOfDay(
+    date
+) {
+
+    const result =
+        new Date(date);
+
+
+    result.setHours(
+        0,
+        0,
+        0,
+        0
     );
 
-}
 
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetBooking() {
-
-    selectedDate =
-        null;
-
-    selectedSlot =
-        null;
-
-    selectedContact =
-        null;
-
-
-    patientMobile.value =
-        "";
-
-    patientEmail.value =
-        "";
-
-
-    dateStep.hidden =
-        false;
-
-    slotStep.hidden =
-        true;
-
-    patientStep.hidden =
-        true;
-
-    paymentStep.hidden =
-        true;
-
-    bookingSuccess.hidden =
-        true;
-
-
-    selectedDateText.textContent =
-        "Select a date";
-
-    selectedSlotText.textContent =
-        "Select a time slot";
-
-
-    qrPaymentBox.hidden =
-        true;
-
-    payFeeButton.disabled =
-        false;
-
-    payFeeButton.textContent =
-        "Pay ₹300";
-
-
-    calendarYear =
-        today.getFullYear();
-
-    calendarMonthIndex =
-        today.getMonth();
-
-}
-    
-
-/* =========================================================
-   DONE
-========================================================= */
-
-if (closeBooking) {
-
-    closeBooking.addEventListener(
-        "click",
-        closeAppointment
-    );
+    return result;
 
 }
 
 
 /* =========================================================
-   ESCAPE
+   RESET BOOKING FLOW
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
+function resetBookingFlow() {
 
-        if (
-            event.key === "Escape" &&
-            appointmentModal &&
-            !appointmentModal.hidden
-        ) {
+    /*
+     * Stop pending payment simulation.
+     */
 
-            closeAppointment();
+    if (paymentTimer) {
 
-        }
+        clearTimeout(
+            paymentTimer
+        );
+
+        paymentTimer =
+            null;
 
     }
-);
+
+
+    /* -----------------------------------------------------
+       Reset state
+    ----------------------------------------------------- */
+
+    bookingState.doctorId =
+        null;
+
+    bookingState.selectedDate =
+        null;
+
+    bookingState.selectedSlot =
+        null;
+
+    bookingState.contactInfo =
+        "";
+
+    bookingState.appointmentNo =
+        null;
+
+
+    /* -----------------------------------------------------
+       Reset doctor
+    ----------------------------------------------------- */
+
+    currentDoctor =
+        null;
+
+
+    /* -----------------------------------------------------
+       Reset calendar
+    ----------------------------------------------------- */
+
+    calendarDate =
+        new Date();
+
+
+    calendarDate.setDate(
+        1
+    );
+
+
+    /* -----------------------------------------------------
+       Reset inputs
+    ----------------------------------------------------- */
+
+    if (patientMobile) {
+
+        patientMobile.value =
+            "";
+
+    }
+
+
+    if (patientEmail) {
+
+        patientEmail.value =
+            "";
+
+    }
+
+
+    /* -----------------------------------------------------
+       Enable payment button
+    ----------------------------------------------------- */
+
+    if (confirmBooking) {
+
+        confirmBooking.disabled =
+            false;
+
+        confirmBooking.textContent =
+            "Pay";
+
+    }
+
+
+    /* -----------------------------------------------------
+       Reset text
+    ----------------------------------------------------- */
+
+    if (appointmentDoctorName) {
+
+        appointmentDoctorName.textContent =
+            "Doctor Name";
+
+    }
+
+
+    if (appointmentFee) {
+
+        appointmentFee.textContent =
+            "₹0";
+
+    }
+
+
+    if (selectedDateText) {
+
+        selectedDateText.textContent =
+            "Please select a date";
+
+    }
+
+
+    if (slotDateText) {
+
+        slotDateText.textContent =
+            "Choose an available time";
+
+    }
+
+
+    if (timeSlots) {
+
+        timeSlots.innerHTML =
+            "";
+
+    }
+
+
+    if (slotEmptyMessage) {
+
+        slotEmptyMessage.hidden =
+            true;
+
+    }
+
+
+    /* -----------------------------------------------------
+       Reset confirmation
+    ----------------------------------------------------- */
+
+    const confirmationFields = [
+
+        "confirmationAppointmentNo",
+
+        "confirmationDoctorName",
+
+        "confirmationSpecialist",
+
+        "confirmationAddress",
+
+        "confirmationDate",
+
+        "confirmationSlot",
+
+        "confirmationContact",
+
+        "confirmationFee"
+
+    ];
+
+
+    confirmationFields.forEach(
+        function (id) {
+
+            const element =
+                document.getElementById(id);
+
+
+            if (element) {
+
+                element.textContent =
+                    "";
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       Always reset to SCREEN 1 internally
+    ----------------------------------------------------- */
+
+    showScreen(1);
+
+}
+
+
+/* =========================================================
+   CLOSE APPOINTMENT MODAL
+========================================================= */
+
+function closeAppointment() {
+
+    if (!appointmentModal) {
+
+        return;
+
+    }
+
+
+    /*
+     * Stop any pending payment timer.
+     */
+
+    if (paymentTimer) {
+
+        clearTimeout(
+            paymentTimer
+        );
+
+        paymentTimer =
+            null;
+
+    }
+
+
+    /*
+     * Completely hide modal.
+     */
+
+    appointmentModal.classList.remove(
+        "open"
+    );
+
+    appointmentModal.hidden =
+        true;
+
+    appointmentModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    /*
+     * Remove body modal state.
+     */
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    /*
+     * Reset everything so next booking starts
+     * from Screen 1.
+     */
+
+    resetBookingFlow();
+
+}
+
+
+/* =========================================================
+   OPTIONAL GLOBAL CLOSE FUNCTION
+========================================================= */
+
+window.closeAppointment =
+    closeAppointment;

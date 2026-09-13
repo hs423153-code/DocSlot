@@ -62,77 +62,120 @@ reviews: [
 ],
     },
 
-
-    {
+        {
         id: "DR002",
-        image: "image/doctor-02.jpg",
-        name: "Dr. Ananya Verma",
-        specialization: "Dermatologist",
-        gender: "female",
+        image: "image/doctor-01.jpg",
+        name: "Dr. Gyan Bhushan Raman",
+        specialization: "General Physician",
+        gender: "male",
 
-        qualification: "MBBS, MD Dermatology",
-        experience: 9,
+        qualification: "MD (General Medicine)-Patna Medical College, Patna-2011 , MBBS-Patna University - 2007",
+        experience: 15,
 
         city: "Kanpur",
-        clinicAddress: "Skin Care Centre, Swaroop Nagar, Kanpur",
+        clinicAddress: "Elite Care Clinic, Near An College & Pani Tanki, Below Suraksha Diagnostic, Boring Patliputra Road, North Sri Krishana Puri, Patna-800013, Bihar",
 
-        rating: 4.7,
-        reviewCount: 98,
+        rating: 4.9,
+        reviewCount: 123,
         fee: 700,
 
         availableDays: [
             "Monday",
             "Tuesday",
+            "Wednesday",
             "Thursday",
-            "Friday",
-            "Saturday"
+            "Friday"
         ],
 
         availableHours: {
-            weekdays: "10:00 AM - 6:00 PM",
+            weekdays: "9:00 AM - 5:00 PM",
             weekends: "10:00 AM - 2:00 PM"
         },
 
         description:
-            "Dr. Ananya Verma provides dermatological care for common skin, hair and nail conditions with a patient-focused approach.",
+            "Dr. Gyan Bhushan Raman is an experienced General Physician specializing in diabetologist, preventive diabetic and General health.",
+        
+        rating: 4.8,
+reviewCount: 126,
 
-        reviews: [
+reviews: [
     {
-        name: "Neha Sharma",
+        name: "Swati Singh",
         rating: 5,
-        text: "Very knowledgeable and polite. I felt comfortable discussing my concerns.",
-        date: "3 weeks ago"
+        text: "I recently visited Dr. Gyan Bhushan Raman at Elite Care Clinic and had an excellent experience. The clinic is well connected and easily accessible, making it convenient for patients. The prices are reasonable, which is a big plus. I was also pleased with the decent coverage offered for treatments. Overall, I highly recommend this clinic for anyone looking for quality care!",
+        date: "5 months ago"
     },
     {
-        name: "Riya Kapoor",
-        rating: 4,
-        text: "Good consultation and clear explanation of the treatment options.",
+        name: "Shrishty",
+        rating: 4.7,
+        text: "My experience at Dr. Gyan Bhushan Raman Elite Care Clinic was exceptional. The clinic maintained a clean and hygienic environment, with all equipment thoroughly sterilized. Services were reasonably priced, and subsidies were available, making healthcare accessible. The staff was professional and attentive, ensuring a comforting visit. Highly recommended!",
         date: "1 month ago"
     },
     {
-        name: "Kunal Mehta",
+        name: "Aman kumar",
         rating: 5,
-        text: "Really good experience. The doctor was attentive and professional.",
+        text: "Dr. Gyan Bhushan Raman at Elite Care Clinic is a standout choice for anyone seeking exceptional medical care. Located conveniently near An College, the clinic boasts quick service and a clean, hygienic environment that ensures patient comfort. My experience here was marked by speedy recovery thanks to Dr. Raman s excellent treatment approach. Highly recommend this clinic for anyone looking for top-notch healthcare!",
         date: "2 months ago"
     }
 ],
     },
 
 
+
     {
         id: "DR003",
-        image: "image/doctor-03.jpg",
-        name: "Dr. Rohan Gupta",
-        specialization: "Orthopedic",
+        image: "image/doctor-02.jpg",
+        name: "Dr. Manish Jain",
+        specialization: "Dermatologist",
         gender: "male",
 
-        qualification: "MBBS, MS Orthopedics",
-        experience: 11,
+        qualification: "MBBS, MD Dermatology",
+        experience: 9,
 
-        city: "Lucknow",
-        clinicAddress: "City Orthopedic Centre, Gomti Nagar, Lucknow",
+        city: "Jaipur",
+        clinicAddress: "Cinestar Tower, G-14, Sector 2, Central Spine, Vidyadhar Nagar, Jaipur, Rajasthan 302039",
 
-        rating: 4.6,
+        rating: 4.7,
+        reviewCount: 98,
+        fee: 500,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "9:00 AM – 12:00 PM , 5:00 PM – 8:30 PM",
+            weekends: "10:00 AM – 12:00 PM , 5:00 PM – 7:00 PM"
+        },
+
+        description:
+            "We don't just list doctors. We carefully research, verify, and recognize those who truly stand out in thier specialities",
+
+        reviews: [
+],
+    },
+
+
+    {
+        id: "DR004",
+        image: "image/doctor-03.jpg",
+        name: "Dr. Babita",
+        specialization: "Dermatologist",
+        gender: "female",
+
+        qualification: "MBBS, MD - Dermatology , Venereology & Leprosy",
+        experience: 9,
+
+        city: "Jaipur",
+        clinicAddress: "Srishti Medicare Private Limited (Srishti Hospital) F1 & 10, Central Spine, Mahal Road, Jagatpura, Jaipur, Rajasthan 302017",
+
+        rating: 3.4,
         reviewCount: 87,
         fee: 750,
 
@@ -144,29 +187,26 @@ reviews: [
         ],
 
         availableHours: {
-            weekdays: "9:00 AM - 4:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
+            weekdays: "10:00 AM – 2:00 PM , 5:00 PM – 8:00 PM ",
+            weekends: ""
         },
-
-        description:
-            "Dr. Rohan Gupta specializes in orthopedic care, joint health, sports-related injuries and musculoskeletal conditions."
     },
 
 
     {
-        id: "DR004",
+        id: "DR005",
         image: "image/doctor-04.jpg",
-        name: "Dr. Sana Khan",
+        name: "Dr. Purshottam Gupta",
         specialization: "General Physician",
         gender: "female",
 
         qualification: "MBBS, MD General Medicine",
         experience: 10,
 
-        city: "Kanpur",
-        clinicAddress: "Sana Medical Centre, Kakadeo, Kanpur",
+        city: "Jaipur",
+        clinicAddress: "(Amar medical and research centre) 3, Kiran Path, Sector 3, Mansarovar city, Jaipur,  Rajasthan 302020",
 
-        rating: 4.9,
+        rating: 4.8,
         reviewCount: 154,
         fee: 600,
 
@@ -180,81 +220,134 @@ reviews: [
         ],
 
         availableHours: {
-            weekdays: "9:00 AM - 5:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
+            weekdays: "10:00 AM – 4:00 PM",
+            weekends: "10:00 AM – 4:00 PM"
         },
 
-        description:
-            "Dr. Sana Khan is a general physician providing comprehensive primary healthcare and routine medical consultations."
     },
 
 
     {
-        id: "DR005",
+        id: "DR006",
         image: "image/doctor-05.jpg",
-        name: "Dr. Aditya Singh",
+        name: "Dr. Yogesh Gupta",
         specialization: "Neurologist",
         gender: "male",
 
         qualification: "MBBS, MD Neurology",
         experience: 13,
 
-        city: "Lucknow",
-        clinicAddress: "Neuro Care Hospital, Hazratganj, Lucknow",
-
-        rating: 4.8,
-        reviewCount: 112,
-        fee: 900,
-
-        availableDays: [
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-        ],
-
-        availableHours: {
-            weekdays: "10:00 AM - 5:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
-        },
-
-        description:
-            "Dr. Aditya Singh specializes in neurological care and provides consultation for a wide range of nervous-system related conditions."
-    },
-
-
-    {
-        id: "DR006",
-        image: "image/doctor-06.jpg",
-        name: "Dr. Meera Kapoor",
-        specialization: "Pediatrician",
-        gender: "female",
-
-        qualification: "MBBS, MD Pediatrics",
-        experience: 8,
-
-        city: "Delhi",
-        clinicAddress: "Little Care Children's Clinic, South Delhi",
+        city: "Jaipur",
+        clinicAddress: "Ground Floor 2, 154, B2 Bypass Rd, SFS Manasarovar, Hans Vihar, Sanganer, Jaipur, Rajasthan 302017",
 
         rating: 4.9,
-        reviewCount: 143,
-        fee: 700,
+        reviewCount: 112,
+        fee: 900,
 
         availableDays: [
             "Monday",
             "Tuesday",
             "Wednesday",
             "Thursday",
-            "Friday"
+            "Friday",
+            "Saturday",
+            "Sunday",
         ],
 
         availableHours: {
-            weekdays: "9:00 AM - 5:00 PM",
+            weekdays: "Hospital open 24 hours. Regular doctor consultation : 10:00 AM – 2:00 PM , 6:00 PM – 8:00 PM",
+            weekends: "Hospital open 24 hours. Regular doctor consultation : 10:00 AM – 2:00 PM , 6:00 PM – 8:00 PM"
+        },
+
+reviews: [
+    {
+        name: "Nisha Kumari",
+        rating: 5,
+        text: "Highly skilled staff & hospital services, facilities also awesome... 👍",
+        date: "5 months ago"
+    },
+    {
+        name: "Aseem Gupta",
+        rating: 4.7,
+        text: "It offers specialized treatment for brain, spine, and nerve-related disorders.",
+        date: "1 month ago"
+    },
+    {
+        name: "PK Meena",
+        rating: 1.2,
+        text: "Very bad experience, very impanctual doctor",
+        date: "2 months ago"
+    }
+],
+    },
+
+
+    {
+        id: "DR007",
+        image: "image/doctor-06.jpg",
+        name: "Dr. Arushi Solanki",
+        specialization: "Darmatologist",
+        gender: "female",
+
+        qualification: "MBBS, DNB - Dermatology & Venereology",
+        experience: 5,
+
+        city: "Jaipur",
+        clinicAddress: "Skinaite Clinic, Number A-16, Mall Road, Ambabadi, Vidhyadhar Nagar, Jaipur",
+
+        rating: 4.9,
+        reviewCount: 40,
+        fee: 400,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "4:30 PM - 8:00 PM",
             weekends: "10:00 AM - 2:00 PM"
         },
 
-        description:
-            "Dr. Meera Kapoor provides pediatric consultations with a focus on child health, development and preventive care."
+    },
+
+    {
+        id: "DR008",
+        image: "image/doctor-06.jpg",
+        name: "Dr.Deepak Sharma",
+        specialization: "Gastroenterologist",
+        gender: "male",
+
+        qualification: "MD, DNB, MBBS",
+        experience: 12,
+
+        city: "Jaipur",
+        clinicAddress: "madhav gastro and eye clinic and advance endoscopy center Health Education & Medical Training opposite Joshi Marg, kalwar road, jhotwara jaipur",
+
+        rating: 4.9,
+        reviewCount: 40,
+        fee: 300,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "10:30 PM - 1:00 AM",
+            weekends: "10:30 PM - 1:00 AM"
+        },
+
     }
 
 ];
@@ -1230,3 +1323,5 @@ if (bookAppointmentButton) {
         }
     });
 }
+
+

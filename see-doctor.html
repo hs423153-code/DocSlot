@@ -46,11 +46,15 @@
                 </a>
 
                 <a href="see-doctor.html" class="nav-link active">
-                    See Doctor
+                    Find a Doctor
                 </a>
 
                 <a href="home-service.html" class="nav-link">
                     Home Service
+                </a>
+
+                <a href="AI-help.html" class="nav-link">
+                    AI Assistance
                 </a>
 
                 <a href="contact.html" class="nav-link">
@@ -665,241 +669,441 @@
 
 
 
-    <!-- =====================================================
-         APPOINTMENT BOOKING MODAL
-    ====================================================== -->
+<!-- =====================================================
+     APPOINTMENT BOOKING MODAL
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="appointmentModal"
+    aria-hidden="true"
+    hidden
+>
 
     <div
-        class="modal-overlay"
-        id="appointmentModal"
-        aria-hidden="true"
-        hidden>
+        class="appointment-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="appointmentDoctorName"
+    >
 
-        <div
-            class="appointment-modal"
-            role="dialog"
-            aria-modal="true">
+        <!-- =================================================
+             CLOSE BUTTON
+        ================================================== -->
 
-
-            <!-- Close -->
-
-            <button
-                type="button"
-                class="modal-close"
-                id="closeAppointmentModal"
-                aria-label="Close appointment window">
-
-                ×
-
-            </button>
+        <button
+            type="button"
+            class="modal-close"
+            id="closeAppointmentModal"
+            aria-label="Close appointment window"
+        >
+            ×
+        </button>
 
 
+        <!-- =================================================
+             HEADER
+        ================================================== -->
 
-            <div class="appointment-header">
+        <div class="appointment-header">
 
-                <span class="section-label">
-                    Appointment
+            <span class="section-label">
+                Appointment
+            </span>
+
+            <h2>
+                Book Your Appointment
+            </h2>
+
+            <p id="appointmentDoctorName">
+                Doctor Name
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             SCREEN 1 — CALENDAR
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="dateStep"
+            data-screen="1"
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    1
                 </span>
 
-                <h2>
-                    Book Your Appointment
-                </h2>
+                <div>
+                    <h3>
+                        Select Date
+                    </h3>
 
-                <p id="appointmentDoctorName">
-                    Doctor Name
-                </p>
+                    <p>
+                        Choose your appointment date
+                    </p>
+                </div>
 
             </div>
 
 
+            <!-- Calendar Header -->
 
-            <!-- =========================================
-                 STEP 1 — DATE
-            ========================================== -->
+            <div class="calendar-header">
 
-            <div
-                class="booking-step"
-                id="dateStep">
+                <button
+                    type="button"
+                    id="prevMonth"
+                    class="calendar-nav"
+                    aria-label="Previous month"
+                >
+                    ‹
+                </button>
 
-                <h3>
-                    1. Select Date
+                <h3 id="calendarMonth">
+                    Month Year
                 </h3>
 
-                <label for="appointmentDate">
-                    Choose appointment date
+                <button
+                    type="button"
+                    id="nextMonth"
+                    class="calendar-nav"
+                    aria-label="Next month"
+                >
+                    ›
+                </button>
+
+            </div>
+
+
+            <!-- Week Days -->
+
+            <div class="calendar-weekdays">
+
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+
+            </div>
+
+
+            <!-- Calendar Dates -->
+
+            <div
+                class="calendar-days"
+                id="calendarDays"
+            >
+                <!-- Generated by JavaScript -->
+            </div>
+
+
+            <!-- Selected Date -->
+
+            <p
+                class="selected-date-text"
+                id="selectedDateText"
+            >
+                Please select a date
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 2 — TIME SLOTS
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="slotStep"
+            data-screen="2"
+            hidden
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    2
+                </span>
+
+                <div>
+                    <h3>
+                        Select Time Slot
+                    </h3>
+
+                    <p id="slotDateText">
+                        Choose an available time
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                class="time-slots"
+                id="timeSlots"
+            >
+                <!-- Generated by JavaScript -->
+            </div>
+
+
+            <p
+                class="slot-empty-message"
+                id="slotEmptyMessage"
+                hidden
+            >
+                No time slots are available for this date.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 3 — PATIENT INFORMATION + PAYMENT
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="patientStep"
+            data-screen="3"
+            hidden
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    3
+                </span>
+
+                <div>
+                    <h3>
+                        Patient Information
+                    </h3>
+
+                    <p>
+                        Enter your contact information
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+                <label for="patientMobile">
+                    Phone Number
                 </label>
 
                 <input
-                    type="date"
-                    id="appointmentDate">
-
-                <button
-                    type="button"
-                    id="continueToSlots"
-                    class="continue-btn">
-
-                    Continue
-
-                </button>
+                    type="tel"
+                    id="patientMobile"
+                    placeholder="Enter phone number"
+                    autocomplete="tel"
+                    inputmode="numeric"
+                >
 
             </div>
 
 
+            <div class="or-divider">
+                <span>OR</span>
+            </div>
 
-            <!-- =========================================
-                 STEP 2 — TIME SLOT
-            ========================================== -->
 
-            <div
-                class="booking-step"
-                id="slotStep"
-                hidden>
+            <!-- Email -->
 
-                <h3>
-                    2. Select Time Slot
-                </h3>
+            <div class="form-group">
 
-                <!--
-                    JS will generate available slots
-                    according to selected doctor's availability.
-                -->
+                <label for="patientEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="patientEmail"
+                    placeholder="Enter email address"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <p class="confirmation-note">
+                Enter either your phone number or email address
+                to receive your booking confirmation.
+            </p>
+
+
+            <!-- Fee -->
+
+            <div class="appointment-fee-box">
+
+                <span>
+                    Consultation Fee
+                </span>
+
+                <strong id="appointmentFee">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <!-- Pay -->
+
+            <button
+                type="button"
+                id="confirmBooking"
+                class="confirm-booking-btn"
+            >
+                Pay ₹0
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 4 — PAYMENT PROCESSING
+        ================================================== -->
+
+        <section
+            class="booking-screen payment-processing-screen"
+            id="paymentProcessingStep"
+            data-screen="4"
+            hidden
+        >
+
+            <div class="processing-content">
 
                 <div
-                    class="time-slots"
-                    id="timeSlots">
-
-                    <!-- JS generated slots -->
-
-                </div>
-
-                <button
-                    type="button"
-                    id="continueToPatient"
-                    class="continue-btn"
-                    disabled>
-
-                    Continue
-
-                </button>
-
-            </div>
-
-
-
-            <!-- =========================================
-                 STEP 3 — PATIENT DETAILS
-            ========================================== -->
-
-            <div
-                class="booking-step"
-                id="patientStep"
-                hidden>
+                    class="payment-spinner"
+                    aria-hidden="true"
+                ></div>
 
                 <h3>
-                    3. Patient Details
+                    Processing your payment...
                 </h3>
 
-
-                <div class="form-group">
-
-                    <label for="patientName">
-                        Patient Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="patientName"
-                        placeholder="Enter patient name"
-                        required>
-
-                </div>
-
-
-
-                <div class="form-group">
-
-                    <label for="patientMobile">
-                        Mobile Number
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="patientMobile"
-                        placeholder="Enter mobile number">
-
-                </div>
-
-
-
-                <div class="form-group">
-
-                    <label for="patientEmail">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="patientEmail"
-                        placeholder="Enter email address">
-
-                </div>
-
-
-                <p class="confirmation-note">
-                    Enter either your mobile number or email
-                    to receive your booking confirmation.
+                <p>
+                    Please wait while we confirm your payment.
                 </p>
-
-
-
-                <button
-                    type="button"
-                    id="confirmBooking"
-                    class="confirm-booking-btn">
-
-                    Confirm Booking
-
-                </button>
 
             </div>
 
+        </section>
 
 
-            <!-- =========================================
-                 STEP 4 — SUCCESS
-            ========================================== -->
 
-            <div
-                class="booking-success"
-                id="bookingSuccess"
-                hidden>
+        <!-- =================================================
+             SCREEN 5 — CONFIRMATION
+        ================================================== -->
 
-                <div class="success-icon">
+        <section
+            class="booking-screen confirmation-screen"
+            id="confirmationStep"
+            data-screen="5"
+            hidden
+        >
+
+            <div class="confirmation-content">
+
+                <div
+                    class="success-icon"
+                    aria-hidden="true"
+                >
                     ✓
                 </div>
+
 
                 <h2>
                     Appointment Booked!
                 </h2>
 
-                <p id="confirmationMessage">
-                    Your appointment has been successfully booked.
+
+                <!-- =========================================
+                     EXACT CONFIRMATION DETAILS
+                ========================================== -->
+
+                <div class="confirmation-details">
+
+                    <p>
+                        <strong>Appointment No.:</strong>
+                        <span id="confirmationAppointmentNo"></span>
+                    </p>
+
+                    <p>
+                        <strong>Doctor's Name:</strong>
+                        <span id="confirmationDoctorName"></span>
+                    </p>
+
+                    <p>
+                        <strong>Specialist:</strong>
+                        <span id="confirmationSpecialist"></span>
+                    </p>
+
+                    <p>
+                        <strong>Address:</strong>
+                        <span id="confirmationAddress"></span>
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        <span id="confirmationDate"></span>
+                    </p>
+
+                    <p>
+                        <strong>Slot:</strong>
+                        <span id="confirmationSlot"></span>
+                    </p>
+
+                    <p>
+                        <strong>Phone No. or Email:</strong>
+                        <span id="confirmationContact"></span>
+                    </p>
+
+                    <p>
+                        <strong>Fee Paid:</strong>
+                        <span id="confirmationFee"></span>
+                    </p>
+
+                </div>
+
+
+                <p class="booking-final-message">
+                    You have successfully booked your appointment!
                 </p>
+
+
+                <!-- Done -->
 
                 <button
                     type="button"
                     id="closeBooking"
-                    class="continue-btn">
-                
+                    class="continue-btn"
+                >
                     Done
-
                 </button>
 
             </div>
 
-        </div>
+        </section>
 
     </div>
+
+</div>
 
     <!-- =====================================================
          FOOTER

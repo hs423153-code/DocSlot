@@ -23,7 +23,7 @@ const doctors = [
 
         city: "Kanpur",
 
-        bestDoctor: false,
+        bestDoctor: true,
 
         availableDays: [
             "Monday",
@@ -39,33 +39,31 @@ const doctors = [
         }
     },
 
-
     {
         id: "DR002",
 
         image: "image/doctor-02.jpg",
 
-        name: "Dr. Ananya Verma",
+        name: "Dr. Gyan Bhushan Raman",
 
-        specialization: "Dermatologist",
+        specialization: "General Physician",
 
-        gender: "female",
+        gender: "male",
 
-        city: "Kanpur",
+        city: "Patna",
 
-        bestDoctor: false,
+        bestDoctor: true,
 
         availableDays: [
             "Monday",
             "Tuesday",
             "Thursday",
             "Friday",
-            "Saturday"
         ],
 
         availableHours: {
-            weekdays: "10:00 AM - 6:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
+            weekdays: "9:00 AM - 10:00 AM , 6:00PM - 8:00PM",
+            weekends: "11:00 AM - 1:00 PM"
         }
     },
 
@@ -73,17 +71,48 @@ const doctors = [
     {
         id: "DR003",
 
-        image: "image/doctor-03.jpg",
+        image: "image/doctor-02.jpg",
 
-        name: "Dr. Rohan Gupta",
+        name: "Dr. Manish Jain",
 
-        specialization: "Orthopedic",
+        specialization: "Dermatologist",
 
         gender: "male",
 
-        city: "Lucknow",
+        city: "Jaipur",
 
-        bestDoctor: false,
+        bestDoctor: true,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "9:00 AM – 12:00 PM , 5:00 PM – 8:30 PM" ,
+            weekends: "10:00 AM – 12:00 PM , 5:00 PM – 7:00 PM"
+        }
+    },
+
+
+    {
+        id: "DR004",
+
+        image: "image/doctor-03.jpg",
+
+        name: "Dr. Babita",
+
+        specialization: "dermatologist",
+
+        gender: "female",
+
+        city: "Jaipur",
+
+        bestDoctor: true,
 
         availableDays: [
             "Monday",
@@ -100,17 +129,17 @@ const doctors = [
 
 
     {
-        id: "DR004",
+        id: "DR005",
 
         image: "image/doctor-04.jpg",
 
-        name: "Dr. Sana Khan",
+        name: "Dr. Purshottam Gupta",
 
         specialization: "General Physician",
 
-        gender: "female",
+        gender: "male",
 
-        city: "Kanpur",
+        city: "Jaipur",
 
         bestDoctor: false,
 
@@ -124,37 +153,8 @@ const doctors = [
         ],
 
         availableHours: {
-            weekdays: "9:00 AM - 5:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
-        }
-    },
-
-
-    {
-        id: "DR005",
-
-        image: "image/doctor-05.jpg",
-
-        name: "Dr. Aditya Singh",
-
-        specialization: "Neurologist",
-
-        gender: "male",
-
-        city: "Lucknow",
-
-        bestDoctor: false,
-
-        availableDays: [
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-        ],
-
-        availableHours: {
-            weekdays: "10:00 AM - 5:00 PM",
-            weekends: "10:00 AM - 2:00 PM"
+            weekdays: "10:00 AM – 4:00 PM",
+            weekends: "10:00 AM – 4:00 PM"
         }
     },
 
@@ -162,15 +162,47 @@ const doctors = [
     {
         id: "DR006",
 
+        image: "image/doctor-05.jpg",
+
+        name: "Dr. Yogesh Gupta",
+
+        specialization: "Neurologist",
+
+        gender: "male",
+
+        city: "Jaipur",
+
+        bestDoctor: true,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "Hospital open 24 hours. Regular doctor consultation : 10:00 AM – 2:00 PM , 6:00 PM – 8:00 PM",
+            weekends: "Hospital open 24 hours. Regular doctor consultation : 10:00 AM – 2:00 PM , 6:00 PM – 8:00 PM"
+        }
+    },
+
+
+    {
+        id: "DR007",
+
         image: "image/doctor-06.jpg",
 
-        name: "Dr. Meera Kapoor",
+        name: "Dr. Arushi Solanki",
 
-        specialization: "Pediatrician",
+        specialization: "Dermatologist",
 
         gender: "female",
 
-        city: "Delhi",
+        city: "Jaipur",
 
         bestDoctor: false,
 
@@ -179,12 +211,138 @@ const doctors = [
             "Tuesday",
             "Wednesday",
             "Thursday",
-            "Friday"
+            "Friday",
+            "Saturday",
+            "Sunday"
         ],
 
         availableHours: {
-            weekdays: "9:00 AM - 5:00 PM",
+            weekdays: "4:30 PM - 8:00 PM",
             weekends: "10:00 AM - 2:00 PM"
+        }
+    },
+
+    {
+        id: "DR008",
+
+        image: "image/doctor-06.jpg",
+
+        name: "Dr. Deepak Sharma",
+
+        specialization: "Gastroenterologist",
+
+        gender: "male",
+
+        city: "Jaipur",
+
+        bestDoctor: false,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "10:00 PM - 1:00 AM",
+            weekends: "10:00 PM - 1:00 AM"
+        }
+    },
+
+    {
+        id: "DR008",
+
+        image: "image/doctor-06.jpg",
+
+        name: "Dr. Deepak Sharma",
+
+        specialization: "Gastroenterologist",
+
+        gender: "male",
+
+        city: "Jaipur",
+
+        bestDoctor: false,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "10:00 PM - 1:00 AM",
+            weekends: "10:00 PM - 2:00 AM"
+        }
+    },
+
+    {
+        id: "DR008",
+
+        image: "image/doctor-06.jpg",
+
+        name: "Dr. Deepak Sharma",
+
+        specialization: "Gastroenterologist",
+
+        gender: "male",
+
+        city: "Jaipur",
+
+        bestDoctor: false,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "10:00 PM - 1:00 AM",
+            weekends: "10:00 PM - 2:00 AM"
+        }
+    },
+
+    {
+        id: "DR008",
+
+        image: "image/doctor-06.jpg",
+
+        name: "Dr. Deepak Sharma",
+
+        specialization: "Gastroenterologist",
+
+        gender: "male",
+
+        city: "Jaipur",
+
+        bestDoctor: false,
+
+        availableDays: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ],
+
+        availableHours: {
+            weekdays: "10:00 PM - 1:00 AM",
+            weekends: "10:00 PM - 2:00 AM"
         }
     }
 

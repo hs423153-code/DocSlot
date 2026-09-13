@@ -4,18 +4,31 @@
 
 :root {
     --primary: #087f7b;
-    --primary-dark: #05625f;
-    --dark: #142323;
-    --muted: #667575;
+    --primary-dark: #05615e;
+    --primary-light: #e9f7f6;
+
+    --dark: #172326;
+    --text: #435255;
+    --muted: #778486;
+
     --white: #ffffff;
-    --bg: #f5fbfa;
-    --border: #dcebea;
+    --bg: #f7faf9;
+    --soft-blue: #eef7fa;
+    --border: #e2eaea;
+
+    --container-width: 1180px;
+
     --danger: #d9534f;
     --success: #16845b;
 }
 
 * {
     box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 body {
@@ -40,6 +53,22 @@ button {
     width: min(1180px, 92%);
     margin: 0 auto;
 }
+
+/* =====================================================
+   3. CONTAINER
+===================================================== */
+
+.container {
+
+    width: min(
+        calc(100% - 40px),
+        var(--container-width)
+    );
+
+    margin: 0 auto;
+
+}
+
 
 /* =====================================================
    4. HEADER

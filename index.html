@@ -39,11 +39,15 @@
                 </a>
 
                 <a href="see-doctor.html" class="nav-link">
-                    See Doctor
+                    Find a Doctor
                 </a>
 
                 <a href="home-service.html" class="nav-link">
                     Home Service
+                </a>
+
+                <a href="AI-help.html" class="nav-link">
+                    AI Assistance
                 </a>
 
                 <a href="contact.html" class="nav-link">
@@ -327,10 +331,6 @@
 </section>
 
 
-        <!-- =================================================
-     BEST DOCTORS SECTION
-================================================== -->
-
 <section class="best-doctors-section">
 
     <div class="container">
@@ -346,36 +346,60 @@
             </h2>
 
             <p>
-                Explore some of our featured doctors
-                and find the right specialist for you.
+                Explore our featured doctors and find
+                the right specialist for you.
             </p>
 
         </div>
 
 
-        <!--
-            Best Doctor cards will be generated
-            automatically by JavaScript.
-        -->
+        <!-- DOCTOR SLIDER -->
 
-        <div
-            class="doctor-featured-container"
-            id="bestDoctorsContainer">
+        <div class="best-doctors-slider">
 
-            <!-- JS GENERATED BEST DOCTORS -->
+            <!-- LEFT ARROW -->
+
+            <button
+                type="button"
+                class="doctor-slider-arrow doctor-slider-prev"
+                id="bestDoctorsPrev"
+                aria-label="Previous doctors">
+
+                &#10094;
+
+            </button>
+
+
+            <!-- CARDS VIEWPORT -->
+
+            <div
+                class="doctor-featured-viewport"
+                id="bestDoctorsViewport">
+
+                <div
+                    class="doctor-featured-container"
+                    id="bestDoctorsContainer">
+
+                    <!-- JS WILL GENERATE CARDS -->
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT ARROW -->
+
+            <button
+                type="button"
+                class="doctor-slider-arrow doctor-slider-next"
+                id="bestDoctorsNext"
+                aria-label="Next doctors">
+
+                &#10095;
+
+            </button>
 
         </div>
-
-
-        <!-- More Doctors Button -->
-
-        <a
-            href="see-doctor.html"
-            class="view-all-doctors">
-
-            See All Doctors
-
-        </a>
 
     </div>
 
@@ -557,6 +581,651 @@
 
     </main>
 
+    <!-- =====================================================
+         DOCTOR DETAILS MODAL
+    ====================================================== -->
+
+    <div
+    class="modal-overlay"
+    id="doctorModal"
+    aria-hidden="true"
+    hidden>
+
+
+        <div
+            class="doctor-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalDoctorName">
+
+
+            <!-- Close -->
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeDoctorModal"
+                aria-label="Close doctor details">
+
+                ×
+
+            </button>
+
+
+
+            <!-- Doctor Photo -->
+
+            <div class="modal-doctor-image">
+
+                <img
+                    id="modalDoctorImage"
+                    src=""
+                    alt="Doctor">
+
+            </div>
+
+
+
+            <!-- Doctor Information -->
+
+            <div class="modal-doctor-info">
+
+                <span
+                    id="modalDoctorSpecialization"
+                    class="doctor-specialization">
+
+                </span>
+
+
+                <h2 id="modalDoctorName">
+                    Doctor Name
+                </h2>
+
+
+                <p id="modalDoctorQualification">
+                    Qualification
+                </p>
+
+
+                <p id="modalDoctorExperience">
+                    Experience
+                </p>
+
+
+                <p id="modalDoctorLocation">
+                    Clinic Location
+                </p>
+
+
+                <div class="modal-rating">
+
+                    <span id="modalDoctorRating">
+                        ★★★★★
+                    </span>
+
+                    <span id="modalDoctorReviews">
+                        0 Reviews
+                    </span>
+
+                </div>
+
+
+
+                <!-- Fee -->
+
+                <div class="doctor-fee">
+
+                    <span>
+                        Consultation Fee
+                    </span>
+
+                    <strong id="modalDoctorFee">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- Availability -->
+
+                <div class="doctor-availability">
+
+                    <h3>
+                        Availability
+                    </h3>
+
+                    <p id="modalDoctorDays">
+                        Available Days
+                    </p>
+
+                    <p id="modalDoctorTiming">
+                        Available Timing
+                    </p>
+
+                </div>
+
+
+
+                <!-- Detailed Reviews -->
+
+                <div class="doctor-reviews">
+
+                    <h3>
+                        Reviews
+                    </h3>
+
+                    <div id="modalDoctorReviewsList">
+
+                        <!--
+                            Reviews will be generated by JS
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div id="modalDoctorReviewsList"></div>
+
+<!-- yahan Write a Review wala block -->
+
+                <div class="write-review">
+
+    <h4>Leave a Review</h4>
+
+    <div class="review-stars-input">
+
+        <button type="button" data-rating="1">★</button>
+        <button type="button" data-rating="2">★</button>
+        <button type="button" data-rating="3">★</button>
+        <button type="button" data-rating="4">★</button>
+        <button type="button" data-rating="5">★</button>
+
+    </div>
+
+    <input
+        type="text"
+        id="reviewerName"
+        placeholder="Your name"
+        maxlength="40">
+
+    <textarea
+        id="reviewText"
+        placeholder="Write your review..."
+        maxlength="300">
+    </textarea>
+
+    <button
+        type="button"
+        id="submitReview"
+        class="submit-review-btn">
+        Submit Review
+    </button>
+
+    <p
+        id="reviewSubmitMessage"
+        class="review-submit-message">
+    </p>
+
+</div>
+
+
+
+                <!-- Book Appointment -->
+
+                <button
+                    type="button"
+                    id="bookAppointmentButton"
+                    class="book-appointment-btn">
+
+                    Book Appointment
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+<!-- =====================================================
+     APPOINTMENT BOOKING MODAL
+====================================================== -->
+
+<div
+    class="modal-overlay"
+    id="appointmentModal"
+    aria-hidden="true"
+    hidden
+>
+
+    <div
+        class="appointment-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="appointmentDoctorName"
+    >
+
+        <!-- =================================================
+             CLOSE BUTTON
+        ================================================== -->
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeAppointmentModal"
+            aria-label="Close appointment window"
+        >
+            ×
+        </button>
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="appointment-header">
+
+            <span class="section-label">
+                Appointment
+            </span>
+
+            <h2>
+                Book Your Appointment
+            </h2>
+
+            <p id="appointmentDoctorName">
+                Doctor Name
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             SCREEN 1 — CALENDAR
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="dateStep"
+            data-screen="1"
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    1
+                </span>
+
+                <div>
+                    <h3>
+                        Select Date
+                    </h3>
+
+                    <p>
+                        Choose your appointment date
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Calendar Header -->
+
+            <div class="calendar-header">
+
+                <button
+                    type="button"
+                    id="prevMonth"
+                    class="calendar-nav"
+                    aria-label="Previous month"
+                >
+                    ‹
+                </button>
+
+                <h3 id="calendarMonth">
+                    Month Year
+                </h3>
+
+                <button
+                    type="button"
+                    id="nextMonth"
+                    class="calendar-nav"
+                    aria-label="Next month"
+                >
+                    ›
+                </button>
+
+            </div>
+
+
+            <!-- Week Days -->
+
+            <div class="calendar-weekdays">
+
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+
+            </div>
+
+
+            <!-- Calendar Dates -->
+
+            <div
+                class="calendar-days"
+                id="calendarDays"
+            >
+                <!-- Generated by JavaScript -->
+            </div>
+
+
+            <!-- Selected Date -->
+
+            <p
+                class="selected-date-text"
+                id="selectedDateText"
+            >
+                Please select a date
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 2 — TIME SLOTS
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="slotStep"
+            data-screen="2"
+            hidden
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    2
+                </span>
+
+                <div>
+                    <h3>
+                        Select Time Slot
+                    </h3>
+
+                    <p id="slotDateText">
+                        Choose an available time
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                class="time-slots"
+                id="timeSlots"
+            >
+                <!-- Generated by JavaScript -->
+            </div>
+
+
+            <p
+                class="slot-empty-message"
+                id="slotEmptyMessage"
+                hidden
+            >
+                No time slots are available for this date.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 3 — PATIENT INFORMATION + PAYMENT
+        ================================================== -->
+
+        <section
+            class="booking-screen"
+            id="patientStep"
+            data-screen="3"
+            hidden
+        >
+
+            <div class="screen-heading">
+
+                <span class="step-number">
+                    3
+                </span>
+
+                <div>
+                    <h3>
+                        Patient Information
+                    </h3>
+
+                    <p>
+                        Enter your contact information
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+                <label for="patientMobile">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="patientMobile"
+                    placeholder="Enter phone number"
+                    autocomplete="tel"
+                    inputmode="numeric"
+                >
+
+            </div>
+
+
+            <div class="or-divider">
+                <span>OR</span>
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="patientEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="patientEmail"
+                    placeholder="Enter email address"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <p class="confirmation-note">
+                Enter either your phone number or email address
+                to receive your booking confirmation.
+            </p>
+
+
+            <!-- Fee -->
+
+            <div class="appointment-fee-box">
+
+                <span>
+                    Consultation Fee
+                </span>
+
+                <strong id="appointmentFee">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <!-- Pay -->
+
+            <button
+                type="button"
+                id="confirmBooking"
+                class="confirm-booking-btn"
+            >
+                Pay ₹0
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 4 — PAYMENT PROCESSING
+        ================================================== -->
+
+        <section
+            class="booking-screen payment-processing-screen"
+            id="paymentProcessingStep"
+            data-screen="4"
+            hidden
+        >
+
+            <div class="processing-content">
+
+                <div
+                    class="payment-spinner"
+                    aria-hidden="true"
+                ></div>
+
+                <h3>
+                    Processing your payment...
+                </h3>
+
+                <p>
+                    Please wait while we confirm your payment.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 5 — CONFIRMATION
+        ================================================== -->
+
+        <section
+            class="booking-screen confirmation-screen"
+            id="confirmationStep"
+            data-screen="5"
+            hidden
+        >
+
+            <div class="confirmation-content">
+
+                <div
+                    class="success-icon"
+                    aria-hidden="true"
+                >
+                    ✓
+                </div>
+
+
+                <h2>
+                    Appointment Booked!
+                </h2>
+
+
+                <!-- =========================================
+                     EXACT CONFIRMATION DETAILS
+                ========================================== -->
+
+                <div class="confirmation-details">
+
+                    <p>
+                        <strong>Appointment No.:</strong>
+                        <span id="confirmationAppointmentNo"></span>
+                    </p>
+
+                    <p>
+                        <strong>Doctor's Name:</strong>
+                        <span id="confirmationDoctorName"></span>
+                    </p>
+
+                    <p>
+                        <strong>Specialist:</strong>
+                        <span id="confirmationSpecialist"></span>
+                    </p>
+
+                    <p>
+                        <strong>Address:</strong>
+                        <span id="confirmationAddress"></span>
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        <span id="confirmationDate"></span>
+                    </p>
+
+                    <p>
+                        <strong>Slot:</strong>
+                        <span id="confirmationSlot"></span>
+                    </p>
+
+                    <p>
+                        <strong>Phone No. or Email:</strong>
+                        <span id="confirmationContact"></span>
+                    </p>
+
+                    <p>
+                        <strong>Fee Paid:</strong>
+                        <span id="confirmationFee"></span>
+                    </p>
+
+                </div>
+
+
+                <p class="booking-final-message">
+                    You have successfully booked your appointment!
+                </p>
+
+
+                <!-- Done -->
+
+                <button
+                    type="button"
+                    id="closeBooking"
+                    class="continue-btn"
+                >
+                    Done
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
 
     <!-- =====================================================
          FOOTER
@@ -621,7 +1290,7 @@
                     Help
                 </h3>
 
-                <a href="AI.html">
+                <a href="AI-help.html">
                     Ask AI
                 </a>
 
@@ -685,8 +1354,9 @@
     <!-- =====================================================
          JAVASCRIPT
     ====================================================== -->
-    <script src="js/doctor-info.js"></script>
     <script src="js/see-doctor.js"></script>
+    <script src="js/doctor-info.js"></script>
+    <script src="js/appointment.js"></script>
     <script src="js/script.js"></script>
 
 </body>

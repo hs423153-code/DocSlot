@@ -157,7 +157,9 @@ function loadBestDoctors() {
     }
 
 
-    /* Check doctor database */
+    /* =====================================================
+       CHECK DOCTOR DATABASE
+    ===================================================== */
 
     if (
         !window.darzciDoctors ||
@@ -179,14 +181,8 @@ function loadBestDoctors() {
 
 
     /* =====================================================
-       SHOW ONLY FIRST 3
+       CLEAR OLD CARDS
     ===================================================== */
-
-    const featuredDoctors =
-        bestDoctors.slice(0, 3);
-
-
-    /* Clear existing content */
 
     container.innerHTML = "";
 
@@ -195,7 +191,7 @@ function loadBestDoctors() {
        NO BEST DOCTORS
     ===================================================== */
 
-    if (featuredDoctors.length === 0) {
+    if (bestDoctors.length === 0) {
 
         container.innerHTML = `
             <p class="no-featured-doctors">
@@ -211,7 +207,7 @@ function loadBestDoctors() {
        CREATE DOCTOR CARDS
     ===================================================== */
 
-    featuredDoctors.forEach(doctor => {
+    bestDoctors.forEach(doctor => {
 
         const card =
             document.createElement("article");
@@ -220,17 +216,23 @@ function loadBestDoctors() {
             "doctor-featured-card";
 
 
-        /* Available days */
+        /* =================================================
+           AVAILABLE DAYS
+        ================================================= */
 
         const availableDays =
             Array.isArray(doctor.availableDays)
+
                 ? doctor.availableDays
                     .map(day => day.substring(0, 4))
                     .join(" - ")
+
                 : "Availability varies";
 
 
-        /* Rating */
+        /* =================================================
+           RATING
+        ================================================= */
 
         const rating =
             doctor.rating ?? "N/A";
@@ -242,6 +244,15 @@ function loadBestDoctors() {
 
         card.innerHTML = `
 
+            <!-- BEST DOCTOR BADGE -->
+
+            <span class="best-doctor-badge">
+                ★ Best Doctor
+            </span>
+
+
+            <!-- DOCTOR IMAGE -->
+
             <div class="doctor-image">
 
                 <img
@@ -251,6 +262,8 @@ function loadBestDoctors() {
 
             </div>
 
+
+            <!-- DOCTOR INFORMATION -->
 
             <div class="doctor-info">
 
@@ -280,6 +293,8 @@ function loadBestDoctors() {
                 </div>
 
 
+                <!-- VIEW DETAILS -->
+
                 <button
                     type="button"
                     class="doctor-details-btn"
@@ -300,7 +315,7 @@ function loadBestDoctors() {
 
 
     /* =====================================================
-       VIEW DETAILS BUTTONS
+       VIEW DETAILS
     ===================================================== */
 
     const detailButtons =
@@ -317,27 +332,174 @@ function loadBestDoctors() {
                 button.dataset.doctorId;
 
 
-            /*
-                Save doctor ID so product.html
-                can use the same doctor database.
-            */
+            if (!doctorId) {
 
-            sessionStorage.setItem(
-                "selectedDoctorId",
-                doctorId
-            );
+                console.error(
+                    "Doctor ID missing."
+                );
+
+                return;
+            }
 
 
-            /*
-                Open doctor listing page.
-            */
+            /* =============================================
+               OPEN EXISTING DOCTOR INFO MODAL
+            ============================================= */
 
-            window.location.href =
-                `product.html?doctor=${doctorId}`;
+            if (
+                typeof openDoctorDetails ===
+                "function"
+            ) {
+
+                openDoctorDetails(doctorId);
+
+            } else {
+
+                console.error(
+                    "openDoctorDetails() not found."
+                );
+
+            }
 
         });
 
     });
+
+
+    /* =====================================================
+       INITIALIZE SLIDER
+    ===================================================== */
+
+    initializeBestDoctorSlider();
+
+}
+
+
+/* =========================================================
+   BEST DOCTOR SLIDER
+========================================================= */
+
+function initializeBestDoctorSlider() {
+
+    const container =
+        document.getElementById(
+            "bestDoctorsContainer"
+        );
+
+    const prevButton =
+        document.getElementById(
+            "bestDoctorsPrev"
+        );
+
+    const nextButton =
+        document.getElementById(
+            "bestDoctorsNext"
+        );
+
+
+    if (
+        !container ||
+        !prevButton ||
+        !nextButton
+    ) {
+        return;
+    }
+
+
+    const cards =
+        container.querySelectorAll(
+            ".doctor-featured-card"
+        );
+
+
+    /* =============================================
+       4 OR LESS → NO SLIDING REQUIRED
+    ============================================= */
+
+    if (cards.length <= 4) {
+
+        prevButton.style.display = "none";
+        nextButton.style.display = "none";
+
+        return;
+    }
+
+
+    let currentPosition = 0;
+
+
+    /*
+        One card moves at a time.
+    */
+
+    const moveSlider = () => {
+
+        const cardWidth =
+            cards[0].offsetWidth;
+
+        const gap =
+            parseFloat(
+                getComputedStyle(container).gap
+            ) || 0;
+
+
+        const moveAmount =
+            cardWidth + gap;
+
+
+        container.style.transform =
+            `translateX(-${currentPosition * moveAmount}px)`;
+
+    };
+
+
+    /* =============================================
+       NEXT
+    ============================================= */
+
+    nextButton.addEventListener(
+        "click",
+        () => {
+
+            const maxPosition =
+                cards.length - 4;
+
+
+            if (
+                currentPosition <
+                maxPosition
+            ) {
+
+                currentPosition++;
+
+                moveSlider();
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       PREVIOUS
+    ============================================= */
+
+    prevButton.addEventListener(
+        "click",
+        () => {
+
+            if (
+                currentPosition > 0
+            ) {
+
+                currentPosition--;
+
+                moveSlider();
+
+            }
+
+        }
+    );
 
 }
 
