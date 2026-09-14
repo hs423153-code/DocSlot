@@ -604,9 +604,8 @@ a {
 
 .doctor-grid {
     display: grid;
-
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-
+    grid-template-columns: repeat(3, minmax(0, 350px));
+    justify-content: center;
     gap: 24px;
 }
 
@@ -643,26 +642,23 @@ a {
 
 /* Doctor image */
 
+/* Doctor image */
 .doctor-card-image {
     position: relative;
-
-    height: 245px;
-
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
     overflow: hidden;
-
     background: var(--primary-light);
 }
-
 
 .doctor-card-image img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
+    object-position: center;
     transition: transform 0.45s ease;
 }
-
 
 .doctor-card:hover .doctor-card-image img {
     transform: scale(1.04);
@@ -861,338 +857,14 @@ a {
 }
 
 
-/* =========================================================
-   8. COMMON MODAL
-========================================================= */
+/* =====================================================
+   DOCTOR DETAILS MODAL
+===================================================== */
 
-.modal-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 2000;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 25px;
-
-    background: rgba(15, 28, 31, 0.60);
-
-    backdrop-filter: blur(6px);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity var(--transition),
-        visibility var(--transition);
-}
-
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.modal-close {
-    position: absolute;
-
-    top: 18px;
-    right: 18px;
-
-    z-index: 5;
-
-    width: 38px;
-    height: 38px;
-
-    border: 1px solid var(--border);
-    border-radius: 50%;
-
-    background: var(--white);
-    color: var(--dark);
-
-    font-size: 23px;
-    line-height: 1;
-
-    transition:
-        background var(--transition),
-        color var(--transition),
-        transform var(--transition);
-}
-
-
-.modal-close:hover {
-    background: var(--primary);
-    color: var(--white);
-
-    transform: rotate(90deg);
-}
-
-
-/* =========================================================
-   9. DOCTOR DETAILS MODAL
-========================================================= */
-
-.doctor-modal {
+#doctorModal .doctor-modal {
     position: relative;
 
-    width: min(900px, 100%);
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    display: grid;
-
-    grid-template-columns: 300px 1fr;
-
-    background: var(--white);
-
-    border-radius: 22px;
-
-    box-shadow: var(--shadow-lg);
-
-    transform: translateY(20px) scale(0.98);
-
-    transition: transform var(--transition);
-}
-
-
-.modal-overlay.active .doctor-modal {
-    transform: translateY(0) scale(1);
-}
-
-
-.modal-doctor-image {
-    min-height: 100%;
-
-    background: var(--primary-light);
-}
-
-
-.modal-doctor-image img {
-    width: 100%;
-    height: 100%;
-
-    min-height: 430px;
-
-    object-fit: cover;
-}
-
-
-.modal-doctor-info {
-    padding: 42px 38px 35px;
-}
-
-
-.modal-doctor-info > h2 {
-    margin-bottom: 8px;
-
-    color: var(--dark);
-
-    font-size: 30px;
-    line-height: 1.2;
-
-    letter-spacing: -0.7px;
-}
-
-
-.modal-doctor-info > p {
-    margin-bottom: 7px;
-
-    color: var(--text);
-
-    font-size: 13px;
-}
-
-
-.modal-doctor-info .doctor-specialization {
-    display: inline-block;
-
-    margin-bottom: 10px;
-
-    color: var(--primary);
-
-    font-size: 12px;
-    font-weight: 700;
-
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-
-/* Rating */
-
-.modal-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    margin: 18px 0 22px;
-}
-
-
-#modalDoctorRating {
-    color: #e6a928;
-
-    letter-spacing: 2px;
-
-    font-size: 14px;
-}
-
-
-#modalDoctorReviews {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-
-/* Fee */
-
-.doctor-fee {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 15px 17px;
-
-    margin-bottom: 22px;
-
-    border-radius: 12px;
-
-    background: var(--primary-light);
-}
-
-
-.doctor-fee span {
-    color: var(--text);
-
-    font-size: 12px;
-    font-weight: 500;
-}
-
-
-.doctor-fee strong {
-    color: var(--primary);
-
-    font-size: 20px;
-}
-
-
-/* Availability */
-
-.doctor-availability {
-    padding: 18px;
-
-    margin-bottom: 22px;
-
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-
-.doctor-availability h3,
-.doctor-reviews h3 {
-    margin-bottom: 10px;
-
-    color: var(--dark);
-
-    font-size: 14px;
-}
-
-
-.doctor-availability p {
-    color: var(--text);
-
-    font-size: 12px;
-}
-
-
-/* Reviews */
-
-.doctor-reviews {
-    margin-bottom: 25px;
-}
-
-
-#modalDoctorReviewsList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-
-.review-item {
-    padding: 12px 14px;
-
-    border-radius: 10px;
-
-    background: var(--light-bg);
-
-    font-size: 12px;
-}
-
-
-.review-item strong {
-    display: block;
-
-    margin-bottom: 3px;
-
-    color: var(--dark);
-}
-
-
-.review-item p {
-    color: var(--muted);
-}
-
-
-/* Book appointment */
-
-.book-appointment-btn {
-    width: 100%;
-    height: 50px;
-
-    border: none;
-    border-radius: 11px;
-
-    background: var(--primary);
-    color: var(--white);
-
-    font-size: 14px;
-    font-weight: 700;
-
-    transition:
-        background var(--transition),
-        transform var(--transition),
-        box-shadow var(--transition);
-}
-
-
-.book-appointment-btn:hover {
-    background: var(--primary-dark);
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 10px 22px rgba(8, 127, 123, 0.20);
-}
-
-
-/* =========================================================
-   10. APPOINTMENT MODAL
-========================================================= */
-
-.appointment-modal {
-    position: relative;
-
-    width: min(600px, 100%);
-
+    width: min(680px, 100%);
     max-height: 90vh;
 
     overflow-y: auto;
@@ -1205,57 +877,351 @@ a {
 
     box-shadow: var(--shadow-lg);
 
-    transform: translateY(20px) scale(0.98);
+    transform: translateY(22px) scale(.97);
 
-    transition: transform var(--transition);
+    transition: transform .25s ease;
 }
 
 
-.modal-overlay.active .appointment-modal {
+#doctorModal[aria-hidden="false"] .doctor-modal {
     transform: translateY(0) scale(1);
 }
 
 
-.appointment-header {
-    margin-bottom: 30px;
+/* =====================================================
+   TOP PROFILE
+===================================================== */
 
-    padding-right: 35px;
+.doctor-profile-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 23px;
+
+    padding-right: 42px;
+
+    margin-bottom: 30px;
 }
 
 
-.appointment-header h2 {
+/* Circular Doctor Image */
+
+.modal-doctor-image {
+    width: 120px;
+    height: 120px;
+
+    flex: 0 0 120px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: var(--primary-light);
+
+    border: 4px solid var(--primary-light);
+}
+
+
+.modal-doctor-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* Doctor Name + Details */
+
+.doctor-profile-info {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.doctor-profile-info .doctor-specialization {
+    display: inline-block;
+
     margin-bottom: 6px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
+
+
+.doctor-profile-info h2 {
+    margin: 0 0 7px;
 
     color: var(--dark);
 
     font-size: 28px;
+
     line-height: 1.2;
+
+    letter-spacing: -.7px;
 }
 
 
-.appointment-header p {
-    color: var(--muted);
+.doctor-profile-info p {
+    margin: 0 0 4px;
+
+    color: var(--text);
 
     font-size: 13px;
+
+    line-height: 1.5;
 }
 
 
-/* Booking step */
+/* =====================================================
+   ABOUT DOCTOR
+===================================================== */
 
-.booking-step {
-    padding: 22px;
+.doctor-description {
+    margin-bottom: 25px;
+}
 
-    margin-bottom: 17px;
 
-    border: 1px solid var(--border);
+.doctor-description h3 {
+    margin-bottom: 9px;
+
+    color: var(--dark);
+
+    font-size: 16px;
+}
+
+
+.doctor-description p {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+
+/* =====================================================
+   INFORMATION BOX
+===================================================== */
+
+.doctor-info-box {
+    padding: 18px 20px;
+
+    margin-bottom: 25px;
+
+    border: 1px solid rgba(8, 127, 123, .16);
+
     border-radius: 14px;
 
-    background: var(--white);
+    background: var(--primary-light);
 }
 
 
-.booking-step h3 {
-    margin-bottom: 16px;
+.doctor-info-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid rgba(8, 127, 123, .11);
+}
+
+
+.doctor-info-row:first-child {
+    padding-top: 0;
+}
+
+
+.doctor-info-row:last-child {
+    padding-bottom: 0;
+
+    border-bottom: none;
+}
+
+
+.doctor-info-row span {
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.doctor-info-row strong {
+    max-width: 65%;
+
+    color: var(--dark);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    text-align: right;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.modal-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0 0 24px;
+}
+
+
+#modalDoctorRating {
+    color: #e6a928;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+}
+
+
+#modalDoctorReviews {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.doctor-reviews {
+    margin: 0 0 24px;
+}
+
+
+.doctor-reviews h3 {
+    margin: 0 0 14px;
+
+    color: var(--dark);
+
+    font-size: 16px;
+}
+
+
+#modalDoctorReviewsList {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.review-item {
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 12px;
+}
+
+
+.review-item:first-child {
+    padding-top: 0;
+}
+
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+
+.review-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.review-item strong {
+    display: block;
+
+    color: var(--dark);
+}
+
+
+.review-stars {
+    color: #e3a21a;
+
+    letter-spacing: 1px;
+}
+
+
+.review-text {
+    margin: 7px 0;
+
+    color: var(--text);
+
+    line-height: 1.6;
+}
+
+
+.review-date {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.no-reviews {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   WRITE A REVIEW
+===================================================== */
+
+.write-review {
+    margin-top: 24px;
+
+    padding-top: 23px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.write-review h4 {
+    margin: 0 0 13px;
 
     color: var(--dark);
 
@@ -1263,248 +1229,258 @@ a {
 }
 
 
-.booking-step label {
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: var(--text);
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-.booking-step input {
-    width: 100%;
-    height: 48px;
-
-    padding: 0 13px;
-
-    border: 1px solid var(--border);
-    border-radius: 9px;
-
-    outline: none;
-
-    color: var(--dark);
-    background: var(--white);
-
-    font-size: 13px;
-
-    transition:
-        border-color var(--transition),
-        box-shadow var(--transition);
-}
-
-
-.booking-step input:focus {
-    border-color: var(--primary);
-
-    box-shadow:
-        0 0 0 3px rgba(8, 127, 123, 0.08);
-}
-
-
-/* Continue */
-
-.continue-btn {
-    width: 100%;
-    height: 46px;
-
-    margin-top: 15px;
-
-    border: none;
-    border-radius: 9px;
-
-    background: var(--primary);
-    color: var(--white);
-
-    font-size: 13px;
-    font-weight: 700;
-
-    transition:
-        background var(--transition),
-        transform var(--transition);
-}
-
-
-.continue-btn:hover:not(:disabled) {
-    background: var(--primary-dark);
-
-    transform: translateY(-1px);
-}
-
-
-.continue-btn:disabled {
-    opacity: 0.45;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   11. TIME SLOTS
-========================================================= */
-
-.time-slots {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 10px;
-}
-
-
-.time-slot {
-    min-height: 43px;
-
-    padding: 8px;
-
-    border: 1px solid var(--border);
-    border-radius: 9px;
-
-    background: var(--white);
-    color: var(--text);
-
-    font-size: 12px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        border-color var(--transition),
-        background var(--transition),
-        color var(--transition);
-}
-
-
-.time-slot:hover {
-    border-color: var(--primary);
-
-    color: var(--primary);
-
-    background: var(--primary-light);
-}
-
-
-.time-slot.selected {
-    border-color: var(--primary);
-
-    background: var(--primary);
-
-    color: var(--white);
-}
-
-
-/* =========================================================
-   12. PATIENT FORM
-========================================================= */
-
-.form-group {
+.review-stars-input {
     display: flex;
-    flex-direction: column;
 
-    gap: 7px;
+    gap: 4px;
 
     margin-bottom: 15px;
 }
 
 
-.form-group label {
-    margin-bottom: 0;
+.review-stars-input button {
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #cfd6d6;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    cursor: pointer;
 }
 
 
-.confirmation-note {
-    padding: 11px 13px;
+.review-stars-input button:hover,
+.review-stars-input button.selected {
+    color: #e3a21a;
+}
 
-    margin-bottom: 18px;
 
-    border-radius: 9px;
+#reviewerName,
+#reviewText {
+    width: 100%;
 
-    background: #f5f8f8;
+    padding: 12px 13px;
 
-    color: var(--muted);
+    margin-bottom: 10px;
 
-    font-size: 11px;
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: var(--white);
+
+    color: var(--dark);
+
+    font-family: inherit;
+
+    font-size: 13px;
+}
+
+
+#reviewerName {
+    height: 46px;
+}
+
+
+#reviewText {
+    min-height: 95px;
+
+    resize: vertical;
+
     line-height: 1.5;
 }
 
 
-.confirm-booking-btn {
+#reviewerName:focus,
+#reviewText:focus {
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(8, 127, 123, .08);
+}
+
+
+.submit-review-btn {
     width: 100%;
-    height: 48px;
+
+    height: 46px;
 
     border: none;
+
     border-radius: 10px;
 
     background: var(--primary);
+
     color: var(--white);
 
     font-size: 13px;
-    font-weight: 700;
 
-    transition:
-        background var(--transition),
-        transform var(--transition);
+    font-weight: 700;
 }
 
 
-.confirm-booking-btn:hover {
+.submit-review-btn:hover {
+    background: var(--primary-dark);
+}
+
+
+.review-submit-message {
+    min-height: 18px;
+
+    margin: 9px 0 0;
+
+    color: var(--primary);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   BOOK APPOINTMENT
+===================================================== */
+
+.book-appointment-btn {
+    width: 100%;
+
+    height: 51px;
+
+    margin-top: 25px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: var(--primary);
+
+    color: var(--white);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: .25s ease;
+}
+
+
+.book-appointment-btn:hover {
     background: var(--primary-dark);
 
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 22px rgba(8, 127, 123, .20);
 }
 
 
-/* =========================================================
-   13. BOOKING SUCCESS
-========================================================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-.booking-success {
-    padding: 35px 10px 10px;
+@media (max-width: 700px) {
 
-    text-align: center;
+    #doctorModal {
+        padding: 12px;
+    }
+
+
+    #doctorModal .doctor-modal {
+        width: 100%;
+
+        max-height: 94vh;
+
+        padding: 30px 22px 24px;
+
+        border-radius: 18px;
+    }
+
+
+    .doctor-profile-header {
+        gap: 17px;
+
+        padding-right: 35px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .modal-doctor-image {
+        width: 92px;
+        height: 92px;
+
+        flex-basis: 92px;
+
+        border-width: 3px;
+    }
+
+
+    .doctor-profile-info h2 {
+        font-size: 22px;
+    }
+
+
+    .doctor-profile-info p {
+        font-size: 12px;
+    }
+
+
+    .doctor-info-row {
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+
+    .doctor-info-row strong {
+        max-width: 100%;
+
+        text-align: left;
+    }
+
 }
 
 
-.success-icon {
-    width: 70px;
-    height: 70px;
+@media (max-width: 480px) {
 
-    display: grid;
-    place-items: center;
+    #doctorModal .doctor-modal {
+        padding: 27px 17px 20px;
+    }
 
-    margin: 0 auto 20px;
 
-    border-radius: 50%;
+    .doctor-profile-header {
+        gap: 14px;
 
-    background: #e7f6ef;
-    color: var(--success);
+        padding-right: 28px;
+    }
 
-    font-size: 32px;
-    font-weight: 700;
+
+    .modal-doctor-image {
+        width: 78px;
+        height: 78px;
+
+        flex-basis: 78px;
+    }
+
+
+    .doctor-profile-info h2 {
+        font-size: 20px;
+    }
+
+
+    .doctor-profile-info p {
+        font-size: 11px;
+    }
+
 }
 
-
-.booking-success h2 {
-    margin-bottom: 8px;
-
-    color: var(--dark);
-
-    font-size: 26px;
-}
-
-
-.booking-success p {
-    max-width: 400px;
-
-    margin: 0 auto 22px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
 
 /* =====================================================
    16. FOOTER
@@ -1893,8 +1869,9 @@ a {
 
 
     .doctor-card-image {
-        height: 220px;
-    }
+    aspect-ratio: 1 / 1;
+    height: auto;
+}
 
 
     .doctor-card-content {
@@ -2724,4 +2701,5 @@ a {
     margin-top: 10px;
     color: #3f7777;
 }
+
 

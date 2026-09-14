@@ -64,7 +64,7 @@ reviews: [
 
         {
         id: "DR002",
-        image: "image/doctor-01.jpg",
+        image: "image/doctor-02.jpg",
         name: "Dr. Gyan Bhushan Raman",
         specialization: "General Physician",
         gender: "male",
@@ -124,7 +124,7 @@ reviews: [
 
     {
         id: "DR003",
-        image: "image/doctor-02.jpg",
+        image: "image/doctor-03.jpg",
         name: "Dr. Manish Jain",
         specialization: "Dermatologist",
         gender: "male",
@@ -164,7 +164,7 @@ reviews: [
 
     {
         id: "DR004",
-        image: "image/doctor-03.jpg",
+        image: "image/doctor-04.jpg",
         name: "Dr. Babita",
         specialization: "Dermatologist",
         gender: "female",
@@ -195,7 +195,7 @@ reviews: [
 
     {
         id: "DR005",
-        image: "image/doctor-04.jpg",
+        image: "image/doctor-05.jpg",
         name: "Dr. Purshottam Gupta",
         specialization: "General Physician",
         gender: "female",
@@ -229,7 +229,7 @@ reviews: [
 
     {
         id: "DR006",
-        image: "image/doctor-05.jpg",
+        image: "image/doctor-06.jpg",
         name: "Dr. Yogesh Gupta",
         specialization: "Neurologist",
         gender: "male",
@@ -284,7 +284,7 @@ reviews: [
 
     {
         id: "DR007",
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-07.jpg",
         name: "Dr. Arushi Solanki",
         specialization: "Darmatologist",
         gender: "female",
@@ -318,7 +318,7 @@ reviews: [
 
     {
         id: "DR008",
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-08.jpg",
         name: "Dr.Deepak Sharma",
         specialization: "Gastroenterologist",
         gender: "male",

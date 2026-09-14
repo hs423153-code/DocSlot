@@ -71,7 +71,7 @@ const doctors = [
     {
         id: "DR003",
 
-        image: "image/doctor-02.jpg",
+        image: "image/doctor-03.jpg",
 
         name: "Dr. Manish Jain",
 
@@ -102,7 +102,7 @@ const doctors = [
     {
         id: "DR004",
 
-        image: "image/doctor-03.jpg",
+        image: "image/doctor-04.jpg",
 
         name: "Dr. Babita",
 
@@ -131,7 +131,7 @@ const doctors = [
     {
         id: "DR005",
 
-        image: "image/doctor-04.jpg",
+        image: "image/doctor-05.jpg",
 
         name: "Dr. Purshottam Gupta",
 
@@ -162,7 +162,7 @@ const doctors = [
     {
         id: "DR006",
 
-        image: "image/doctor-05.jpg",
+        image: "image/doctor-06.jpg",
 
         name: "Dr. Yogesh Gupta",
 
@@ -194,7 +194,7 @@ const doctors = [
     {
         id: "DR007",
 
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-07.jpg",
 
         name: "Dr. Arushi Solanki",
 
@@ -225,7 +225,7 @@ const doctors = [
     {
         id: "DR008",
 
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-08.jpg",
 
         name: "Dr. Deepak Sharma",
 
@@ -256,7 +256,7 @@ const doctors = [
     {
         id: "DR008",
 
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-09.jpg",
 
         name: "Dr. Deepak Sharma",
 
@@ -287,7 +287,7 @@ const doctors = [
     {
         id: "DR008",
 
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-10.jpg",
 
         name: "Dr. Deepak Sharma",
 
@@ -318,7 +318,7 @@ const doctors = [
     {
         id: "DR008",
 
-        image: "image/doctor-06.jpg",
+        image: "image/doctor-11.jpg",
 
         name: "Dr. Deepak Sharma",
 
