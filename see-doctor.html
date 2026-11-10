@@ -13,6 +13,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/see-doctor.css">
+    <link rel="stylesheet" href="css/navbar.css">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +36,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="site-logo">
-                DocSlot
+                <span class="logo-icon">🩺</span> Doc<span class="logo-highlight">Slot</span>
             </a>
 
             <!-- Navigation -->
@@ -61,13 +62,17 @@
                     Contact
                 </a>
 
+                <a href="see-doctor.html" class="nav-cta-btn">
+                    Book Appointment
+                </a>
+
             </nav>
 
-            <!-- Mobile menu button
-                 JS/CSS se later hamburger banega -->
+            <!-- Mobile menu button -->
             <button class="menu-toggle"
                 type="button"
-                aria-label="Open navigation menu">
+                aria-label="Toggle navigation menu"
+                aria-expanded="false">
 
                 <span></span>
                 <span></span>
@@ -1247,6 +1252,7 @@ Keep script at the end of body
 <script src="js/see-doctor.js"></script>
 <script src="js/doctor-info.js"></script>
 <script src="js/appointment.js"></script>
+<script src="js/navbar.js"></script>
 
 </body>
 </HTML>

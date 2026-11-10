@@ -10,6 +10,7 @@
     <title>DocSlot - Home Service</title>
 
     <link rel="stylesheet" href="css/home-service.css">
+    <link rel="stylesheet" href="css/navbar.css">
 
     <!-- Icons -->
     <link
@@ -29,7 +30,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="site-logo">
-                DocSlot
+                <span class="logo-icon">🩺</span> Doc<span class="logo-highlight">Slot</span>
             </a>
 
             <!-- Navigation -->
@@ -55,13 +56,17 @@
                     Contact
                 </a>
 
+                <a href="see-doctor.html" class="nav-cta-btn">
+                    Book Appointment
+                </a>
+
             </nav>
 
-            <!-- Mobile menu button
-                 JS/CSS se later hamburger banega -->
+            <!-- Mobile menu button -->
             <button class="menu-toggle"
                 type="button"
-                aria-label="Open navigation menu">
+                aria-label="Toggle navigation menu"
+                aria-expanded="false">
 
                 <span></span>
                 <span></span>
@@ -1003,6 +1008,7 @@
     </footer>
 
 <script src="js/home-service.js"></script>
+<script src="js/navbar.js"></script>
 
 </body>
 </html>

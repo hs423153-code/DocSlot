@@ -14,6 +14,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="site-logo">
-                DocSlot
+                <span class="logo-icon">🩺</span> Doc<span class="logo-highlight">Slot</span>
             </a>
 
             <!-- Navigation -->
@@ -54,13 +55,17 @@
                     Contact
                 </a>
 
+                <a href="see-doctor.html" class="nav-cta-btn">
+                    Book Appointment
+                </a>
+
             </nav>
 
-            <!-- Mobile menu button
-                 JS/CSS se later hamburger banega -->
+            <!-- Mobile menu button -->
             <button class="menu-toggle"
                 type="button"
-                aria-label="Open navigation menu">
+                aria-label="Toggle navigation menu"
+                aria-expanded="false">
 
                 <span></span>
                 <span></span>
@@ -113,7 +118,7 @@
 
                     <div class="hero-actions">
 
-                        <a href="product.html"
+                        <a href="see-doctor.html"
                             class="btn btn-primary">
                             Find a Doctor
                         </a>
@@ -157,7 +162,7 @@
 
                     <div class="hero-actions">
 
-                        <a href="product.html"
+                        <a href="see-doctor.html"
                             class="btn btn-primary">
                             Explore Doctors
                         </a>
@@ -206,7 +211,7 @@
                             Book Home Service
                         </a>
 
-                        <a href="product.html"
+                        <a href="see-doctor.html"
                             class="btn btn-secondary">
                             See Doctors
                         </a>
@@ -1357,6 +1362,7 @@
     <script src="js/see-doctor.js"></script>
     <script src="js/doctor-info.js"></script>
     <script src="js/appointment.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="js/script.js"></script>
 
 </body>

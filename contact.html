@@ -13,46 +13,70 @@
 >
 
 <link rel="stylesheet" href="css/contact.css">
+<link rel="stylesheet" href="css/navbar.css">
 
 </head>
 
 <body>
 
 
-<!-- =========================
-     NAVBAR
-========================== -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-<header class="navbar">
+    <header class="site-header">
 
-    <div class="nav-container">
+        <div class="container header-container">
 
-        <a href="index.html" class="logo">
-            <span class="logo-icon">🩺</span>
-            <span>Doc<span>Slot</span></span>
-        </a>
+            <!-- Logo -->
+            <a href="index.html" class="site-logo">
+                <span class="logo-icon">🩺</span> Doc<span class="logo-highlight">Slot</span>
+            </a>
 
-        <nav class="nav-links">
+            <!-- Navigation -->
+            <nav class="main-nav">
 
-            <a href="index.html">Home</a>
+                <a href="index.html" class="nav-link">
+                    Home
+                </a>
 
-            <a href="see-doctor.html">Find a Doctor</a>
+                <a href="see-doctor.html" class="nav-link">
+                    Find a Doctor
+                </a>
 
-            <a href="home-service.html">Home Service</a>
+                <a href="home-service.html" class="nav-link">
+                    Home Service
+                </a>
 
-            <a href="AI.html">AI Assistance</a>
+                <a href="AI-help.html" class="nav-link">
+                    AI Assistance
+                </a>
 
-            <a href="contact.html" class="active">Contact Us</a>
+                <a href="contact.html" class="nav-link active">
+                    Contact
+                </a>
 
-        </nav>
+                <a href="see-doctor.html" class="nav-cta-btn">
+                    Book Appointment
+                </a>
 
-        <a href="see-doctor.html" class="nav-button">
-            Book Appointment
-        </a>
+            </nav>
 
-    </div>
+            <!-- Mobile menu button -->
+            <button class="menu-toggle"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false">
 
-</header>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
 
 
 <!-- =========================
@@ -578,6 +602,8 @@
     });
 
 </script>
+
+<script src="js/navbar.js"></script>
 
 </body>
 </html>
